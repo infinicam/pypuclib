@@ -1,0 +1,22 @@
+include pyproject.toml
+
+# Include the README
+include *.md
+
+# Include the license file
+include LICENSE.txt
+
+# Include setup.py
+include setup.py
+
+# Include the data files
+recursive-include data *
+
+# Include the extra source file
+include src/*.h
+include src/*.cpp
+
+# Include the extra library files
+include lib/*.lib
+include dll/*.dll
+include include/*.h
