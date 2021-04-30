@@ -147,5 +147,5 @@ To build pypuclib, the following environment is required.
 
 Don't hesitate to ask any questions or issues on GitHub.
 
-#### developped by: photron logo
+#### developped by:
 <img src="doc/Photron_logo.png" width="100">
