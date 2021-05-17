@@ -143,9 +143,11 @@ To build pypuclib, the following environment is required.
 
 　  :warning: This package can use for windows only. 
 
-## Issues
+### Support and License
 
-Don't hesitate to ask any questions or issues on GitHub.
+This samples are released under the [MIT](https://www.catch.jp/oss-license/2013/09/27/mit_license/) Licesne.
+
+If you have any questions, please contact us on the GitHub issue page.
 
 #### developped by:
 <img src="doc/Photron_logo.png" width="100">
