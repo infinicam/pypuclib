@@ -145,7 +145,7 @@ To build pypuclib, the following environment is required.
 
 ### Support and License
 
-This samples are released under the [MIT](https://www.catch.jp/oss-license/2013/09/27/mit_license/) Licesne.
+This samples are released under the [MIT](https://opensource.org/licenses/mit-license.php) Licesne.
 
 If you have any questions, please contact us on the GitHub issue page.
 
