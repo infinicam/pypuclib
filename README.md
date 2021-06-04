@@ -25,7 +25,7 @@ You can install it in any of the following ways:
   py -m pip install pypuclib
   ```
 
-* install from source code
+* Install from source code
   
   ```
   git clone repositryURL
@@ -35,6 +35,14 @@ You can install it in any of the following ways:
   
   ```
   pip install ./
+  ```
+
+* Document
+
+  Use "help" python command to see the document
+ 
+  ```python
+  help(pypuclib)
   ```
 
 ## Quick start for image processing
