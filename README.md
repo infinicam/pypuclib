@@ -1,37 +1,37 @@
 # pypuclib
 
 pypuclib is python package for INFINICAM SDK [PUCLIB](https://www.photron.co.jp/products/hsvcam/infinicam/tech.html).
-This package can control  [INFINICAM UC-1](https://www.photron.co.jp/products/hsvcam/infinicam/) on python.
+This package allows user to control  [INFINICAM UC-1](https://www.photron.co.jp/products/hsvcam/infinicam/) on python.
 
-## How to use
+## How to Use
 
-1. Install INFINICAM SDK [PUCLIB](https://www.photron.co.jp/products/hsvcam/infinicam/tech.html). and install driver, Visual C++ Redistributable 2019.
+1. Install INFINICAM SDK [PUCLIB](https://www.photron.co.jp/products/hsvcam/infinicam/tech.html), driver, and Visual C++ Redistributable 2019.
 2. See [Install](#Install) section to install pypuclib package.
-3. See [Quick start](#Quick-start-for-image-processing) section to start programming.
+3. See [Quick Start](#Quick-start-for-image-processing) section to start programming.
 
 ## Install
 
 You can install it in any of the following ways:
 
-* Open command prompt and install using pip from [pypi](https://pypi.org/) 
+* Open command prompt and install using pip from [pypi](https://pypi.org/) .
 
   ```
   pip install pypuclib
   ```
 
-  If don't register environment variable for python path, use this command instead.
+  If you don't register environment variable for python path, use this command instead.
 
   ```
   py -m pip install pypuclib
   ```
 
-* Install from source code
+* Install from source code.
   
   ```
   git clone repositryURL
   ```
 
-  Move current directory to pypuclib/pypuclib/ and install using 
+  Move current directory to pypuclib/pypuclib/ and install using this command.
   
   ```
   pip install ./
@@ -39,15 +39,15 @@ You can install it in any of the following ways:
 
 * Document
 
-  Use "help" python command to see the document
+  Use "help" python command to see the document.
  
   ```python
   help(pypuclib)
   ```
 
-## Quick start for image processing
+## Quick Start for Image Processing
 
-To connect the camera first detected:
+To connect the first detected camera:
 
   ```python
   cam = CameraFactory().create()
@@ -68,7 +68,7 @@ To decode image, get decoder object from camera and use it like:
 
 Decoded array is numpy array, so now you can use to imageprocessing package like opencv directory.
 
-If want to use only resion of interest:
+If you want to use only the region of interest:
 
   ```python
   x = 0, y = 0, w = 128, h = 128
@@ -77,7 +77,7 @@ If want to use only resion of interest:
 
 This can reduce the decoding time.
 
-## For high speed processing
+## For High Speed Processing
 
 Use beginXfer and endXfer to get callback from C++.
 
@@ -97,65 +97,65 @@ Use beginXfer and endXfer to get callback from C++.
   cam.endXfer()
 ```
 
-## How to run samples
+## How to Run Samples
 
 1. Install pypuclib using pip.
 
-2. download following sample source code.
+2. Download following sample source code.
 
-3. run on python.
+3. Run on python.
 
 ```python
   python hello_world.py
 ```
 
-* [hellow_world](pypuclib/pypuclib_sample/hello_world.py)
+* [hello_world](pypuclib/pypuclib_sample/hello_world.py)
 
-  hello world sample to stream live image and save bitmap.
+  Sample of streaming a live image and saving a bitmap.
 
 * [create_movie](pypuclib/pypuclib_sample/create_movie.py)
 
-  High speed streaming to save video.
+  Sample of saving videos with high speed streaming.
 
 * [tracking_sample](pypuclib/pypuclib_sample/tracking_sample.py)
 
-  1000fps realtime tracking sample.
+  Sample of real-time tracking at 1,000 fps.
 
 * [gui_sample](pypuclib/pypuclib_sample/create_movie.py)
 
-  GUI samples for control camera parameter and recording.
+  GUI samples for controlling camera parameters and recording.
 
-## Source code structure
+## Source Code Structure
 
 This repository consists of three projects.
 
 * [pypuclib](pypuclib/pypuclib)
   
-  source code of python wrapper of PUCLIB
+  Source code of python wrapper of PUCLIB
 
 * [pupuclib_sample](pypuclib/pypuclib_sample)
 
-  python sample code using pypucilib
+  Python sample code using pypucilib
 
 * [pypuclib_test](pypuclib/pypuclib_test)
 
-  unit test of pypuclib
+  Unit test of pypuclib
 
-## Build Enviroment
+## Prerequisites
 
 To build pypuclib, the following environment is required.
 
 * Installed Visual Studio 2019
 
-　  :warning: Needs MSVC compiler to build package.
+　  :warning: The MSVC compiler is required to build the package.
 
-　  :warning: This package can use for windows only. 
+　  :warning: This package is available for Windows only. 
 
 ### Support and License
 
-This samples are released under the [MIT](https://opensource.org/licenses/mit-license.php) Licesne.
+This samples are released under the [MIT](https://opensource.org/licenses/mit-license.php) License.
 
 If you have any questions, please contact us on the GitHub issue page.
 
-#### developped by:
+#### Developped by:
 <img src="doc/Photron_logo.png" width="100">
