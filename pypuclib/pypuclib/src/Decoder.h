@@ -190,7 +190,7 @@ public:
 	"                                                  \n"
 	"Returns                                           \n"
 	"-------                                           \n"
-	"numpy array(uint8)                                \n"
+	"numpy array(uint8)                                \n" 
 	"    Numpy array of the decompressed image.        \n"
 	"    Array size is (h, w).                         \n"
 	"\"\"                                              \n");
@@ -198,6 +198,76 @@ public:
 	{
 		py::array_t<uint8_t> buf({ h, w });
 		decode(array.mutable_data(), buf.mutable_data(), x, y, w, h, w);
+		return buf;
+	}
+
+	PY_DOC(DOC_DECODE_DC_A,
+		"\"\"Decode compressed DC data.                    \n"
+		"                                                  \n"
+		"This function use numpy array input.              \n"
+		"This decode data of numpy array to specified roi  \n"
+		"image.                                            \n"
+		"                                                  \n"
+		"Parameters                                        \n"
+		"----------                                        \n"
+		"array : numpy array(uint8)                        \n"
+		"    Numpy array of 1d compressed data.            \n"
+		"bx : int                                          \n"
+		"    Decode start block position of x coordinate.  \n"
+		"by : int                                          \n"
+		"    Decode start block position of y coordinate.  \n"
+		"countX : int                                      \n"
+		"    Decode block count start from bx.             \n"
+		"countY : int                                      \n"
+		"    Decode block count start from by.             \n"
+		"                                                  \n"
+		"Returns                                           \n"
+		"-------                                           \n"
+		"numpy array(uint8)                                \n"
+		"    Numpy array of the decompressed image.        \n"
+		"    Array size is (h, w).                         \n"
+		"\"\"                                              \n");
+	py::array_t<uint8_t> decodeDC(py::array_t<uint8_t>& array, int bx, int by, int countX, int countY)
+	{
+		py::array_t<uint8_t> buf({ countY, countX });
+		decodeDC(array.mutable_data(), buf.mutable_data(), bx, by, countX, countY);
+		return buf;
+	}
+
+	PY_DOC(DOC_DECODE_DC_B,
+		"\"\"Decode compressed DC data.                    \n"
+		"                                                  \n"
+		"This function use numpy array input.              \n"
+		"This decode data of numpy array to specified roi  \n"
+		"image.                                            \n"
+		"                                                  \n"
+		"Parameters                                        \n"
+		"----------                                        \n"
+		"array : numpy array(uint8)                        \n"
+		"    Numpy array of 1d compressed data.            \n"
+		"bx : int                                          \n"
+		"    Decode start block position of x coordinate.  \n"
+		"by : int                                          \n"
+		"    Decode start block position of y coordinate.  \n"
+		"countX : int                                      \n"
+		"    Decode block count start from bx.             \n"
+		"countY : int                                      \n"
+		"    Decode block count start from by.             \n"
+		"                                                  \n"
+		"Returns                                           \n"
+		"-------                                           \n"
+		"numpy array(uint8)                                \n"
+		"    Numpy array of the decompressed image.        \n"
+		"    Array size is (h, w).                         \n"
+		"\"\"                                              \n");
+	py::array_t<uint8_t> decodeDC(XferData* data, int bx, int by, int countX, int countY)
+	{
+		if (!data->compressed()) {
+			throw(WrapperException("the data already decoded."));
+		}
+
+		py::array_t<uint8_t> buf({ countY, countX });
+		decodeDC(data->dataInfo()->pData, buf.mutable_data(), bx, by, countX, countY);
 		return buf;
 	}
 
@@ -263,6 +333,14 @@ private:
 		auto ret = PUC_DecodeDataMultiThread(dst, x, y, w, h, lb, src, m_quantize, m_numThread);
 		if (PUC_CHK_FAILED(ret)) {
 			throw(PUCException("PUC_DecodeDataMultiThread", ret));
+		}
+	}
+
+	void decodeDC(uint8_t* src, uint8_t* dst, int bx, int by, int countX, int countY)
+	{
+		auto ret = PUC_DecodeDCData(dst, bx, by, countX, countY, src);
+		if (PUC_CHK_FAILED(ret)) {
+			throw(PUCException("PUC_DecodeDCData", ret));
 		}
 	}
 

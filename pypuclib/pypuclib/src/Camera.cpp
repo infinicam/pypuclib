@@ -95,6 +95,18 @@ ResolutionLimit Camera::resolutionLimit() const
 	return ResolutionLimit(lw, lh);
 }
 
+FramerateLimit Camera::framerateLimit() const
+{
+	
+	PUC_FRAMERATE_LIMIT_INFO info;
+	auto ret = PUC_GetFramerateLimit(m_handle, &info);
+	if (PUC_CHK_FAILED(ret)) {
+		throw(PUCException("PUC_GetFramerateLimit", ret));
+	}
+
+	return FramerateLimit(info.nMinFrameRate, info.nMaxFrameRate);
+}
+
 void Camera::setResolution(const Resolution& res)
 {
 	auto ret = PUC_SetResolution(m_handle, res.width, res.height);
@@ -277,12 +289,14 @@ void Camera::endXfer()
 {
 	stopCallback();
 
-	py::gil_scoped_release release;
+	py::gil_scoped_release release{};
 
 	auto ret = PUC_EndXferData(m_handle);
 	if (PUC_CHK_FAILED(ret)) {
 		throw(PUCException("PUC_EndXferData", ret));
 	}
+
+	m_pythonCallback = nullptr;
 }
 
 bool Camera::isXferring()
@@ -347,6 +361,29 @@ void Camera::callbackWork(PPUC_XFER_DATA_INFO pInfo)
 			throw(WrapperException("bad memory allocation"));
 		}
 
-		m_pythonCallback(p.get());
+		try
+		{
+			m_pythonCallback(p.get());
+		}
+		catch (py::error_already_set& e)
+		{
+			printf(e.what());
+		}
+	}
+}
+
+void Camera::resetDevice()
+{
+	auto ret = PUC_ResetDevice(m_deviceNo);
+	if (PUC_CHK_FAILED(ret)) {
+		throw(PUCException("PUC_ResetDevice", ret));
+	}
+}
+
+void Camera::resetSequenceNo()
+{
+	auto ret = PUC_ResetSequenceNo(m_handle);
+	if (PUC_CHK_FAILED(ret)) {
+		throw(PUCException("PUC_ResetSequenceNo", ret));
 	}
 }

@@ -83,7 +83,7 @@ class Application():
             min_value, max_value, min_pt, max_pt = cv2.minMaxLoc(match)
 
             # move decoding roi
-            renewROI(self.roi, max_pt, self.cam.resolution())
+            renewROI(self.roi, max_pt, self.reso)
 
             # share data
             self.trackPt[0] = self.roi[0] + max_pt[0]

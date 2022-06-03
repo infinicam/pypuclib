@@ -1,15 +1,17 @@
-#ifndef __PUCLIB_H
+ï»¿#ifndef __PUCLIB_H
 #define __PUCLIB_H
 
 /*! 
 	@mainpage
 	@~english
-		@brief This SDK is a Windows-compatible library that controls the PHOTRON high-speed camera "Infinicam" from a PC.@n
+		@brief This SDK is a Windows-compatible library that controls the PHOTRON high-speed camera "INFINICAM" from a PC.@n
 			See the quick manual for basic usage of this SDK. This reference describes all available constants, enumerations, structures, and functions.
+	@copyright Copyright (C) 2022 PHOTRON LIMITED
+
 	@~japanese
-		@brief –{SDK‚ÍAƒtƒHƒgƒƒ“‚‘¬“xƒJƒƒ‰uInfinicamv‚ğPC‚©‚çƒRƒ“ƒgƒ[ƒ‹‚·‚éWindowsê—p‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚Å‚·B@n
-			SDK‚ÌŠî–{“I‚Èg‚¢•û‚ÍƒNƒCƒbƒNƒ}ƒjƒ…ƒAƒ‹‚ğ‚²——‚­‚¾‚³‚¢B–{‘—¿‚Å‚ÍA—˜—p‰Â”\‚È‘S‚Ä‚Ì’è”A—ñ‹“‘ÌA\‘¢‘ÌAŠÖ”‚É‚Â‚¢‚Ä‹LÚ‚µ‚Ä‚¢‚Ü‚·B
-	@copyright Copyright (C) 2020 PHOTRON LIMITED
+		@brief æœ¬SDKã¯ã€ãƒ•ã‚©ãƒˆãƒ­ãƒ³é«˜é€Ÿåº¦ã‚«ãƒ¡ãƒ©ã€ŒINFINICAMã€ã‚’PCã‹ã‚‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã™ã‚‹Windowså°‚ç”¨ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚@n
+			SDKã®åŸºæœ¬çš„ãªä½¿ã„æ–¹ã¯ã‚¯ã‚¤ãƒƒã‚¯ãƒãƒ‹ãƒ¥ã‚¢ãƒ«ã‚’ã”è¦§ãã ã•ã„ã€‚æœ¬è³‡æ–™ã§ã¯ã€åˆ©ç”¨å¯èƒ½ãªå…¨ã¦ã®å®šæ•°ã€åˆ—æŒ™ä½“ã€æ§‹é€ ä½“ã€é–¢æ•°ã«ã¤ã„ã¦è¨˜è¼‰ã—ã¦ã„ã¾ã™ã€‚
+	@copyright Copyright (C) 2022 PHOTRON LIMITED
 */
 
 #ifdef	__cplusplus
@@ -17,36 +19,36 @@ extern "C" {
 #endif
 
 /*! @~english  @brief Maximum number of connectable devices
-	@~japanese @brief Ú‘±‰Â”\‚ÈÅ‘åƒfƒoƒCƒX” */
+	@~japanese @brief æ¥ç¶šå¯èƒ½ãªæœ€å¤§ãƒ‡ãƒã‚¤ã‚¹æ•° */
 #define PUC_MAX_DEVICE				16
 /*! @~english  @brief Maximum number of characters.
-	@~japanese @brief Å‘å•¶š” */
+	@~japanese @brief æœ€å¤§æ–‡å­—æ•° */
 #define PUC_MAX_LEN					256
 /*! @~english  @brief Quantization table count (8*8)
-	@~japanese @brief —Êq‰»ƒe[ƒuƒ‹‚ÌŒÂ”(8*8) */
+	@~japanese @brief é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ã®å€‹æ•°(8*8) */
 #define PUC_Q_COUNT					64
 /*! @~english  @brief Minimum ring buffer count for continuous transfer.
-	@~japanese @brief ˜A‘±“]‘—‚ÌÅ¬ƒŠƒ“ƒOƒoƒbƒtƒ@” */
+	@~japanese @brief é€£ç¶šè»¢é€æ™‚ã®æœ€å°ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡æ•° */
 #define PUC_MIN_RING_BUF_COUNT		4
 /*! @~english  @brief Maximum ring buffer count for continuous transfer.
-	@~japanese @brief ˜A‘±“]‘—‚ÌÅ‘åƒŠƒ“ƒOƒoƒbƒtƒ@” */
+	@~japanese @brief é€£ç¶šè»¢é€æ™‚ã®æœ€å¤§ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡æ•° */
 #define PUC_MAX_RING_BUF_COUNT		65535
 /*! @~english  @brief Mode for automatically setting the timeout duration (ms) based on the frame rate when no response is received from the device.
-	@~japanese @brief ƒfƒoƒCƒX‚©‚ç‰“š‚ª‚È‚¢ê‡‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)‚ğAB‰e‘¬“x‚É‰‚¶‚Ä©“®‚Åİ’è‚·‚éƒ‚[ƒh */
+	@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰å¿œç­”ãŒãªã„å ´åˆã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)ã‚’ã€æ’®å½±é€Ÿåº¦ã«å¿œã˜ã¦è‡ªå‹•ã§è¨­å®šã™ã‚‹ãƒ¢ãƒ¼ãƒ‰ */
 #define PUC_XFER_TIMEOUT_AUTO		0
 /*! @~english  @brief Mode for setting the timeout duration (ms) to infinite when no response is received from the device.
-	@~japanese @brief ƒfƒoƒCƒX‚©‚ç‰“š‚ª‚È‚¢ê‡‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)‚ğ–³ŒÀ‚Éİ’è‚·‚éƒ‚[ƒh */
+	@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰å¿œç­”ãŒãªã„å ´åˆã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)ã‚’ç„¡é™ã«è¨­å®šã™ã‚‹ãƒ¢ãƒ¼ãƒ‰ */
 #define PUC_XFER_TIMEOUT_INFINITE	0xFFFFFFFF
 /*! @~english  @brief Constant value expressing the output magnification rate of synchronization signal is 0.5.
-	@~japanese @brief “¯ŠúM†o—Í”{—¦0.5”{‚ğ•\‚·’è” */
+	@~japanese @brief åŒæœŸä¿¡å·å‡ºåŠ›å€ç‡0.5å€ã‚’è¡¨ã™å®šæ•° */
 #define PUC_SYNC_OUT_MAGNIFICATION_0_5	0
 /*! @~english  @brief Constant value expressing the thread count for multi thread decoding
-	@~japanese @brief ƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‚ÅƒfƒR[ƒh‚·‚éÛ‚ÌƒXƒŒƒbƒhÅ‘å”‚ğ•\‚·’è” */
+	@~japanese @brief ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã§ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹éš›ã®ã‚¹ãƒ¬ãƒƒãƒ‰æœ€å¤§æ•°ã‚’è¡¨ã™å®šæ•° */
 #define PUC_MAX_DECODE_THREAD_COUNT	32
 
 
 /*! @~english  @brief Enumeration for ON/OFF setting
-	@~japanese @brief ON^OFF‚ğ•\‚·—ñ‹“‘Ì */
+	@~japanese @brief ONï¼OFFã‚’è¡¨ã™åˆ—æŒ™ä½“ */
 typedef enum
 {
 	/*! @~english  @brief OFF 
@@ -58,217 +60,236 @@ typedef enum
 } PUC_MODE;
 
 /*! @~english  @brief Enumeration for signal polarity
-	@~japanese @brief M†‚Ì‹É«‚ğ•\‚·—ñ‹“‘Ì */
+	@~japanese @brief ä¿¡å·ã®æ¥µæ€§ã‚’è¡¨ã™åˆ—æŒ™ä½“ */
 typedef enum
 {
 	/*! @~english  @brief Positive polarity signal
-		@~japanese @brief ³‹É«‚ÌM† */
+		@~japanese @brief æ­£æ¥µæ€§ã®ä¿¡å· */
 	PUC_SIGNAL_POSI = 0,
 	/*! @~english  @brief Negative polarity signal
-		@~japanese @brief •‰‹É«‚ÌM† */
+		@~japanese @brief è² æ¥µæ€§ã®ä¿¡å· */
 	PUC_SIGNAL_NEGA = 1,
 } PUC_SIGNAL;
 
 /*! @~english  @brief Enumeration for synchronization
-	@~japanese @brief “¯Šú‚ğ•\‚·—ñ‹“‘Ì */
+	@~japanese @brief åŒæœŸã‚’è¡¨ã™åˆ—æŒ™ä½“ */
 typedef enum
 {
 	/*! @~english  @brief Internal operation
-		@~japanese @brief “à•”“®ì */
+		@~japanese @brief å†…éƒ¨å‹•ä½œ */
 	PUC_SYNC_INTERNAL = 0,
 	/*! @~english  @brief Synchronize to external signal
-		@~japanese @brief ŠO•”‚©‚ç‚ÌM†‚É“¯Šú‚·‚é */
+		@~japanese @brief å¤–éƒ¨ã‹ã‚‰ã®ä¿¡å·ã«åŒæœŸã™ã‚‹ */
 	PUC_SYNC_EXTERNAL = 1,
 } PUC_SYNC_MODE;
 
 /*! @~english  @brief Enumeration for device color/monochrome setting
-	@~japanese @brief ƒfƒoƒCƒX‚ÌƒJƒ‰[^ƒ‚ƒmƒNƒ‚ğ•\‚·—ñ‹“‘Ì */
+	@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã®ã‚«ãƒ©ãƒ¼ï¼ãƒ¢ãƒã‚¯ãƒ­ã‚’è¡¨ã™åˆ—æŒ™ä½“ */
 typedef enum
 {
 	/*! @~english  @brief Monochrome
-		@~japanese @brief ƒ‚ƒmƒNƒ */
+		@~japanese @brief ãƒ¢ãƒã‚¯ãƒ­ */
 	PUC_COLOR_MONO = 0,
 	/*! @~english  @brief Color
-		@~japanese @brief ƒJƒ‰[ */
+		@~japanese @brief ã‚«ãƒ©ãƒ¼ */
 	PUC_COLOR_COLOR = 1,
 } PUC_COLOR_TYPE;
 
 /*! @~english  @brief Enumeration for transfer data mode setting
-	@~japanese @brief “]‘—ƒf[ƒ^ƒ‚[ƒh‚ğ•\‚·—ñ‹“‘Ì */
+	@~japanese @brief è»¢é€ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰ã‚’è¡¨ã™åˆ—æŒ™ä½“ */
 typedef enum
 {
 	/*! @~english  @brief Transfer compressed data
-		@~japanese @brief ˆ³kƒf[ƒ^“]‘— */
+		@~japanese @brief åœ§ç¸®ãƒ‡ãƒ¼ã‚¿è»¢é€ */
 	PUC_DATA_COMPRESSED = 0,
 	/*! @~english  @brief Transfer decompressed data(gray)
-		@~japanese @brief “WŠJÏ‚İ‚Ìƒf[ƒ^“]‘—(ƒOƒŒ[) */
+		@~japanese @brief å±•é–‹æ¸ˆã¿ã®ãƒ‡ãƒ¼ã‚¿è»¢é€(ã‚°ãƒ¬ãƒ¼) */
 	PUC_DATA_DECOMPRESSED_GRAY = 1,
 } PUC_DATA_MODE;
 
 
 /*! @~english  @brief Device handle
-	@~japanese @brief ƒfƒoƒCƒX‚ğ•\‚·ƒnƒ“ƒhƒ‹ */
+	@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‚’è¡¨ã™ãƒãƒ³ãƒ‰ãƒ« */
 typedef void* PUC_HANDLE;
 /*! @~english  @brief Pointer for the device handle
-	@~japanese @brief ƒfƒoƒCƒX‚ğ•\‚·ƒnƒ“ƒhƒ‹‚Ìƒ|ƒCƒ“ƒ^ */
+	@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‚’è¡¨ã™ãƒãƒ³ãƒ‰ãƒ«ã®ãƒã‚¤ãƒ³ã‚¿ */
 typedef PUC_HANDLE* PPUC_HANDLE;
 
 /*! @~english  @brief Error code
-	@~japanese @brief ƒGƒ‰[ƒR[ƒh */
+	@~japanese @brief ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ */
 typedef enum
 {
 	/*! @~english  @brief Succeeded
-		@~japanese @brief ¬Œ÷ */
+		@~japanese @brief æˆåŠŸ */
 	PUC_SUCCEEDED = 0,
 	/*! @~english  @brief Initialization has not been performed. Please execute the PUC_Initialize function.
-		@~japanese @brief ‰Šú‰»‚³‚ê‚Ä‚¢‚Ü‚¹‚ñBPUC_InitializeŠÖ”‚ğÀs‚µ‚Ä‚­‚¾‚³‚¢B */
+		@~japanese @brief åˆæœŸåŒ–ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚PUC_Initializeé–¢æ•°ã‚’å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚ */
 	PUC_ERROR_UNINITIALIZE = 1,
 	/*! @~english  @brief Initialization is already complete.
-		@~japanese @brief Šù‚É‰Šú‰»‚³‚ê‚Ä‚¢‚Ü‚·B */
+		@~japanese @brief æ—¢ã«åˆæœŸåŒ–ã•ã‚Œã¦ã„ã¾ã™ã€‚ */
 	PUC_ERROR_INITIALIZED = 2,
 	/*! @~english  @brief The specified device number does not exist.
-		@~japanese @brief w’è‚³‚ê‚½ƒfƒoƒCƒX”Ô†‚Í‘¶İ‚µ‚Ü‚¹‚ñB */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸãƒ‡ãƒã‚¤ã‚¹ç•ªå·ã¯å­˜åœ¨ã—ã¾ã›ã‚“ã€‚ */
 	PUC_ERROR_NOT_EXIST_DEVICE_NO = 3,
 	/*! @~english  @brief The specified device handle is NULL.
-		@~japanese @brief w’è‚³‚ê‚½ƒfƒoƒCƒXƒnƒ“ƒhƒ‹‚ªNULL‚Å‚·B */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«ãŒNULLã§ã™ã€‚ */
 	PUC_ERROR_ILLEGAL_DEVICE_HANDLE = 4,
 	/*! @~english  @brief The specified argument is NULL.
-		@~japanese @brief w’è‚³‚ê‚½ˆø”‚ªNULL‚Å‚·B */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸå¼•æ•°ãŒNULLã§ã™ã€‚ */
 	PUC_ERROR_ILLEGAL_ARG = 5,
 	/*! @~english  @brief The specified resolution cannot be set.
-		@~japanese @brief w’è‚³‚ê‚½‰ğ‘œ“x‚Íİ’è‚Å‚«‚Ü‚¹‚ñB */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸè§£åƒåº¦ã¯è¨­å®šã§ãã¾ã›ã‚“ã€‚ */
 	PUC_ERROR_ILLEGAL_RESOLUTION = 6,
 	/*! @~english  @brief The specified framerate cannot be set.
-		@~japanese @brief w’è‚³‚ê‚½B‰e‘¬“x‚Íİ’è‚Å‚«‚Ü‚¹‚ñB */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸæ’®å½±é€Ÿåº¦ã¯è¨­å®šã§ãã¾ã›ã‚“ã€‚ */
 	PUC_ERROR_ILLEGAL_FRAME_RATE = 7,
 	/*! @~english  @brief The specified exposure time or non-exposure time (clock units) cannot be set.
-		@~japanese @brief w’è‚³‚ê‚½˜IŒõŠúŠÔ‚Ü‚½‚Í”ñ˜IŒõŠúŠÔ(ƒNƒƒbƒN’PˆÊ)‚Íİ’è‚Å‚«‚Ü‚¹‚ñB */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸéœ²å…‰æœŸé–“ã¾ãŸã¯ééœ²å…‰æœŸé–“(ã‚¯ãƒ­ãƒƒã‚¯å˜ä½)ã¯è¨­å®šã§ãã¾ã›ã‚“ã€‚ */
 	PUC_ERROR_ILLEGAL_EXPOSE_CLOCK = 8,
 	/*! @~english  @brief Failed to open the device.
-		@~japanese @brief ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚É¸”s‚µ‚Ü‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_DEVICE_OPEN = 9,
 	/*! @~english  @brief The device is not open.
-		@~japanese @brief ƒfƒoƒCƒX‚ªƒI[ƒvƒ“‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ãŒã‚ªãƒ¼ãƒ—ãƒ³ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚ */
 	PUC_ERROR_DEVICE_NOTOPEN = 10,
 	/*! @~english  @brief Failed to read data from the device.
-		@~japanese @brief ƒfƒoƒCƒX‚©‚ç‚Ìƒf[ƒ^“Ç‚İæ‚è‚É¸”s‚µ‚Ü‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰ã®ãƒ‡ãƒ¼ã‚¿èª­ã¿å–ã‚Šã«å¤±æ•—ã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_DEVICE_READ = 11,
 	/*! @~english  @brief Failed to write data to the device.
-		@~japanese @brief ƒfƒoƒCƒX‚Ö‚Ìƒf[ƒ^‘‚«‚İ‚É¸”s‚µ‚Ü‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã¸ã®ãƒ‡ãƒ¼ã‚¿æ›¸ãè¾¼ã¿ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_DEVICE_WRITE = 12,
 	/*! @~english  @brief There are modules in the SDK that could not load.
-		@~japanese @brief SDK“à‚Ìˆê•”ƒ‚ƒWƒ…[ƒ‹‚ªƒ[ƒh‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief SDKå†…ã®ä¸€éƒ¨ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãŒãƒ­ãƒ¼ãƒ‰ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_MODULE_LOAD = 13,
 	/*! @~english  @brief The exclusive process of the function has timed out.
-		@~japanese @brief ŠÖ”‚Ì”r‘¼ˆ—‚ªƒ^ƒCƒ€ƒAƒEƒg‚µ‚Ü‚µ‚½B */
+		@~japanese @brief é–¢æ•°ã®æ’ä»–å‡¦ç†ãŒã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_LOCK_TIMEOUT = 14,
 	/*! @~english  @brief Failed to send a GET command to the device.
-		@~japanese @brief ƒfƒoƒCƒX‚Ö‚Ìæ“¾ƒRƒ}ƒ“ƒh‘—M‚É¸”s‚µ‚Ü‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã¸ã®å–å¾—ã‚³ãƒãƒ³ãƒ‰é€ä¿¡ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_GET_CMD = 15,
 	/*! @~english  @brief Failed to send a SET command to the device.
-		@~japanese @brief ƒfƒoƒCƒX‚Ö‚Ìİ’èƒRƒ}ƒ“ƒh‘—M‚É¸”s‚µ‚Ü‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã¸ã®è¨­å®šã‚³ãƒãƒ³ãƒ‰é€ä¿¡ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_SET_CMD = 16,
 	/*! @~english  @brief The data of specified size could not be read from the device.
-		@~japanese @brief ƒfƒoƒCƒX‚©‚çˆÓ}‚µ‚½ƒTƒCƒY‚Ìƒf[ƒ^‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰æ„å›³ã—ãŸã‚µã‚¤ã‚ºã®ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚ã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_NOTEQUAL_READ_SIZE = 17,
 	/*! @~english  @brief The data of specified size could not be written to the device.
-		@~japanese @brief ƒfƒoƒCƒX‚ÉˆÓ}‚µ‚½ƒTƒCƒY‚Ìƒf[ƒ^‚ğ‘‚«‚ß‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã«æ„å›³ã—ãŸã‚µã‚¤ã‚ºã®ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚ã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_NOTEQUAL_WRITE_SIZE = 18,
 	/*! @~english  @brief The header information in the data received from the device is invalid.
-		@~japanese @brief ƒfƒoƒCƒX‚©‚çóM‚µ‚½ƒf[ƒ^‚Ìƒwƒbƒ_[î•ñ‚ª•s³‚Å‚·B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰å—ä¿¡ã—ãŸãƒ‡ãƒ¼ã‚¿ã®ãƒ˜ãƒƒãƒ€ãƒ¼æƒ…å ±ãŒä¸æ­£ã§ã™ã€‚ */
 	PUC_ERROR_XFER_DATA_INVALID_HEADER = 19,
 	/*! @~english  @brief Unable to start data transfer.
-		@~japanese @brief ƒf[ƒ^“]‘—‚ªŠJn‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒ¼ã‚¿è»¢é€ãŒé–‹å§‹ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_XFER_DATA_BEGIN = 20,
 	/*! @~english  @brief An unexpected error occurred during waiting for a data transfer from the device.
-		@~japanese @brief ƒfƒoƒCƒX‚©‚ç‚Ìƒf[ƒ^“]‘—‘Ò‚¿‚ÅˆÓ}‚¹‚Ê–â‘è‚ª”­¶‚µ‚Ü‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰ã®ãƒ‡ãƒ¼ã‚¿è»¢é€å¾…ã¡ã§æ„å›³ã›ã¬å•é¡ŒãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚ */
 	PUC_ERROR_XFER_DATA_WAIT = 21,
 	/*! @~english  @brief The data transfer ended abnormally.
-		@~japanese @brief ƒf[ƒ^“]‘—I—¹‚ª³í‚És‚í‚ê‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief ãƒ‡ãƒ¼ã‚¿è»¢é€çµ‚äº†ãŒæ­£å¸¸ã«è¡Œã‚ã‚Œã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_XFER_DATA_FINISH = 22,
 	/*! @~english  @brief Unable to process as a data transfer is in progress.
-		@~japanese @brief “]‘—’†‚Ì‚½‚ßˆ—‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief è»¢é€ä¸­ã®ãŸã‚å‡¦ç†ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_XFERRING = 23,
 	/*! @~english  @brief The specified ring buffer count is invalid.
-		@~japanese @brief w’è‚³‚ê‚½ƒŠƒ“ƒOƒoƒbƒtƒ@”‚ª•s³‚Å‚·B */
+		@~japanese @brief æŒ‡å®šã•ã‚ŒãŸãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡æ•°ãŒä¸æ­£ã§ã™ã€‚ */
 	PUC_ERROR_RING_BUF_COUNT = 24,
 	/*! @~english  @brief Unable to process as a synchronize to external signal is in progress.
-		@~japanese @brief ŠO•”“¯Šú’†‚Ì‚½‚ßˆ—‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B */
+		@~japanese @brief å¤–éƒ¨åŒæœŸä¸­ã®ãŸã‚å‡¦ç†ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚ */
 	PUC_ERROR_SYNC_EXTERNAL = 25,
+	/*! @~english  @brief This function is not supprted.
+		@~japanese @brief ã“ã®é–¢æ•°ã¯ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚ */
+	PUC_ERROR_NOTSUPPORT = 26,
 } PUCRESULT;
 
 /*! @~english  @brief The macro to be positive when an error code is normal.
-	@~japanese @brief ƒGƒ‰[ƒR[ƒh‚ª³í‚É³‚Æ‚È‚éƒ}ƒNƒ */
+	@~japanese @brief ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ãŒæ­£å¸¸æ™‚ã«æ­£ã¨ãªã‚‹ãƒã‚¯ãƒ­ */
 #define PUC_CHK_SUCCEEDED(res) (res == PUC_SUCCEEDED)
 /*! @~english  @brief The macro to be positive when an error code is not normal.
-	@~japanese @brief ƒGƒ‰[ƒR[ƒh‚ª³íˆÈŠO‚Ì‚É³‚Æ‚È‚éƒ}ƒNƒ */
+	@~japanese @brief ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ãŒæ­£å¸¸ä»¥å¤–ã®æ™‚ã«æ­£ã¨ãªã‚‹ãƒã‚¯ãƒ­ */
 #define PUC_CHK_FAILED(res) (res != PUC_SUCCEEDED)
 
 
 /*!
 	@struct PUC_DETECT_INFO
 	@~english  @brief Structure for storing device search results
-	@~japanese @brief ƒfƒoƒCƒXŒŸõŒ‹‰Ê‚ğŠi”[‚·‚é\‘¢‘Ì
+	@~japanese @brief ãƒ‡ãƒã‚¤ã‚¹æ¤œç´¢çµæœã‚’æ ¼ç´ã™ã‚‹æ§‹é€ ä½“
 */
 typedef struct
 {
 	/*! @~english  @brief Number of detected devices.
-		@~japanese @brief Œ©‚Â‚©‚Á‚½ƒfƒoƒCƒXŒÂ” */
+		@~japanese @brief è¦‹ã¤ã‹ã£ãŸãƒ‡ãƒã‚¤ã‚¹å€‹æ•° */
 	UINT32 nDeviceCount;
 	/*! @~english  @brief List of device IDs found
-		@~japanese @brief Œ©‚Â‚©‚Á‚½ƒfƒoƒCƒX”Ô†ˆê—— */
+		@~japanese @brief è¦‹ã¤ã‹ã£ãŸãƒ‡ãƒã‚¤ã‚¹ç•ªå·ä¸€è¦§ */
 	UINT32 nDeviceNoList[PUC_MAX_DEVICE];
 } PUC_DETECT_INFO, *PPUC_DETECT_INFO;
 
 /*!
 	@struct PUC_RESO_LIMIT_INFO
 	@~english  @brief Structure for storing resolution limit values
-	@~japanese @brief ‰ğ‘œ“x‚ÌŒÀŠE’l‚ğŠi”[‚·‚é\‘¢‘Ì
+	@~japanese @brief è§£åƒåº¦ã®é™ç•Œå€¤ã‚’æ ¼ç´ã™ã‚‹æ§‹é€ ä½“
 */
 typedef struct
 {
 	/*! @~english  @brief Maximum horizontal resolution
-		@~japanese @brief Å‘å‰ğ‘œ“x• */
+		@~japanese @brief æœ€å¤§è§£åƒåº¦å¹… */
 	UINT32 nMaxWidth;
 	/*! @~english  @brief Maximum vertical resolution
-		@~japanese @brief Å‘å‰ğ‘œ“x‚‚³  */
+		@~japanese @brief æœ€å¤§è§£åƒåº¦é«˜ã•  */
 	UINT32 nMaxHeight;
 	/*! @~english  @brief Minimum horizontal resolution
-		@~japanese @brief Å¬‰ğ‘œ“x• */
+		@~japanese @brief æœ€å°è§£åƒåº¦å¹… */
 	UINT32 nMinWidth;
 	/*! @~english  @brief Minimum vertical resolution
-		@~japanese @brief Å¬‰ğ‘œ“x‚‚³ */
+		@~japanese @brief æœ€å°è§£åƒåº¦é«˜ã• */
 	UINT32 nMinHeight;
 	/*! @~english  @brief Minimum unit for altering the horizontal resolution
-		@~japanese @brief ‰ğ‘œ“x•‚Ì•ÏX‰Â”\‚ÈÅ¬’PˆÊ */
+		@~japanese @brief è§£åƒåº¦å¹…ã®å¤‰æ›´å¯èƒ½ãªæœ€å°å˜ä½ */
 	UINT32 nUnitWidth;
 	/*! @~english  @brief Minimum unit for altering the vertical resolution
-		@~japanese @brief ‰ğ‘œ“x‚‚³‚Ì•ÏX‰Â”\‚ÈÅ¬’PˆÊ */
+		@~japanese @brief è§£åƒåº¦é«˜ã•ã®å¤‰æ›´å¯èƒ½ãªæœ€å°å˜ä½ */
 	UINT32 nUnitHeight;
 } PUC_RESO_LIMIT_INFO, * PPUC_RESO_LIMIT_INFO;
 
 /*!
+	@struct PUC_FRAMERATE_LIMIT_INFO
+	@~english  @brief Structure for storing framerate limit values
+	@~japanese @brief æ’®å½±é€Ÿåº¦ã®é™ç•Œå€¤ã‚’æ ¼ç´ã™ã‚‹æ§‹é€ ä½“
+*/
+typedef struct
+{
+	/*! @~english  @brief Minimum Framerate
+	@~japanese @brief æœ€å°æ’®å½±é€Ÿåº¦ */
+	UINT32 nMinFrameRate;
+
+	/*! @~english  @brief Maximum Framerate
+	@~japanese @brief æœ€å¤§æ’®å½±é€Ÿåº¦ */
+	UINT32 nMaxFrameRate;
+}PUC_FRAMERATE_LIMIT_INFO, *PPUC_FRAMERATE_LIMIT_INFO;
+
+/*!
 	@struct PUC_XFER_DATA_INFO
 	@~english  @brief Structure for storing the information of transfer data.
-	@~japanese @brief “]‘—ƒf[ƒ^î•ñ‚ğŠi”[‚·‚é\‘¢‘Ì
+	@~japanese @brief è»¢é€ãƒ‡ãƒ¼ã‚¿æƒ…å ±ã‚’æ ¼ç´ã™ã‚‹æ§‹é€ ä½“
 */
 typedef struct
 {
 	/*! @~english  @brief Location for unpacked transfer data. It is necessary to allocate the required amount in advance. The mode of transfer data depends on the transfer data mode setting (COMPRESSED/DECOMPRESSED).
-		@~japanese @brief “]‘—ƒf[ƒ^‚Ì“WŠJæB‚ ‚ç‚©‚¶‚ß•K—v—ÊŠm•Û‚µ‚Ä‚¨‚­•K—v‚ ‚èB“]‘—‚³‚ê‚éƒf[ƒ^‚Í“]‘—ƒf[ƒ^ƒ‚[ƒh(COMPRESSED/DECOMPRESSED)‚ÉˆË‘¶‚·‚é */
+		@~japanese @brief è»¢é€ãƒ‡ãƒ¼ã‚¿ã®å±•é–‹å…ˆã€‚ã‚ã‚‰ã‹ã˜ã‚å¿…è¦é‡ç¢ºä¿ã—ã¦ãŠãå¿…è¦ã‚ã‚Šã€‚è»¢é€ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã¯è»¢é€ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰(COMPRESSED/DECOMPRESSED)ã«ä¾å­˜ã™ã‚‹ */
 	PUINT8 pData;
 	/*! @~english  @brief The size of transfer data. Stores the size of transfer data.
-		@~japanese @brief “]‘—ƒf[ƒ^‚ÌƒTƒCƒYB“]‘—‚³‚ê‚½ƒf[ƒ^‚ÌƒTƒCƒY‚ªŠi”[‚³‚ê‚é */
+		@~japanese @brief è»¢é€ãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã€‚è»¢é€ã•ã‚ŒãŸãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºãŒæ ¼ç´ã•ã‚Œã‚‹ */
 	UINT32 nDataSize;
 	/*! @~english  @brief The sequence number of transfer data.
-		@~japanese @brief “]‘—ƒf[ƒ^‚ÌƒV[ƒPƒ“ƒX”Ô† */
+		@~japanese @brief è»¢é€ãƒ‡ãƒ¼ã‚¿ã®ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ç•ªå· */
 	USHORT nSequenceNo;
 } PUC_XFER_DATA_INFO, *PPUC_XFER_DATA_INFO;
 
 
 
 /*! @~english  @brief The callback function type called during continuous transfer
-	@~japanese @brief ˜A‘±“]‘—’†‚ÉŒÄ‚Î‚ê‚éƒR[ƒ‹ƒoƒbƒNŠÖ”‚ÌŒ^ */
+	@~japanese @brief é€£ç¶šè»¢é€ä¸­ã«å‘¼ã°ã‚Œã‚‹ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®å‹ */
 typedef void(*RECIEVE_CALLBACK)(PPUC_XFER_DATA_INFO, void*);
 
 
@@ -281,10 +302,10 @@ typedef void(*RECIEVE_CALLBACK)(PPUC_XFER_DATA_INFO, void*);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief –{ƒ‰ƒCƒuƒ‰ƒŠ‚ğ‰Šú‰»‚µ‚Ü‚·B
-		@details ‰‰ñ‚É1“x‚¾‚¯Às‚µ‚Ä‚­‚¾‚³‚¢B@nI—¹ˆ—‚Í–{ƒvƒƒZƒXI—¹‚É©“®“I‚És‚í‚ê‚Ü‚·B
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief æœ¬ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’åˆæœŸåŒ–ã—ã¾ã™ã€‚
+		@details åˆå›ã«1åº¦ã ã‘å®Ÿè¡Œã—ã¦ãã ã•ã„ã€‚@nçµ‚äº†å‡¦ç†ã¯æœ¬ãƒ—ãƒ­ã‚»ã‚¹çµ‚äº†æ™‚ã«è‡ªå‹•çš„ã«è¡Œã‚ã‚Œã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_Initialize();
 
@@ -297,11 +318,11 @@ PUCRESULT WINAPI PUC_Initialize();
 		@note This function is thread-safe.
 		@see PUC_OpenDevice
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ğŒŸõ‚µ‚Ü‚·B
-		@details Šù‚ÉƒfƒoƒCƒX”Ô†‚ª•ª‚©‚Á‚Ä‚¢‚éê‡‚ÍAŒŸõ‚¹‚¸‚ÉƒI[ƒvƒ“‚·‚é‚±‚Æ‚à‰Â”\‚Å‚·B
-		@param[out] pDetectInfo Œ©‚Â‚©‚Á‚½ƒfƒoƒCƒX‚Ìî•ñ‚ªŠi”[‚³‚ê‚Ü‚·B
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‚’æ¤œç´¢ã—ã¾ã™ã€‚
+		@details æ—¢ã«ãƒ‡ãƒã‚¤ã‚¹ç•ªå·ãŒåˆ†ã‹ã£ã¦ã„ã‚‹å ´åˆã¯ã€æ¤œç´¢ã›ãšã«ã‚ªãƒ¼ãƒ—ãƒ³ã™ã‚‹ã“ã¨ã‚‚å¯èƒ½ã§ã™ã€‚
+		@param[out] pDetectInfo è¦‹ã¤ã‹ã£ãŸãƒ‡ãƒã‚¤ã‚¹ã®æƒ…å ±ãŒæ ¼ç´ã•ã‚Œã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_OpenDevice
 */
 PUCRESULT WINAPI PUC_DetectDevice(PPUC_DETECT_INFO pDetectInfo);
@@ -316,12 +337,12 @@ PUCRESULT WINAPI PUC_DetectDevice(PPUC_DETECT_INFO pDetectInfo);
 		@note This function is thread-safe.
 		@see PUC_CloseDevice
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ğƒI[ƒvƒ“‚µ‚Ü‚·B
-		@details Šù‚ÉƒI[ƒvƒ“’†‚ÌƒfƒoƒCƒX”Ô†‚ğw’è‚·‚é‚Æˆê“xƒNƒ[ƒY‚³‚ê‚Ü‚·‚Ì‚Å‚²’ˆÓ‚­‚¾‚³‚¢B
-		@param[in] nDeviceNo ŒŸõ‚µ‚½ƒfƒoƒCƒX”Ô†‚ğw’è‚µ‚Ü‚·B
-		@param[out] pDeviceHandle ƒI[ƒvƒ“‚µ‚½ƒfƒoƒCƒX‚ğ‘€ì‚·‚é‚½‚ß‚Ìƒnƒ“ƒhƒ‹‚ªŠi”[‚³‚ê‚Ü‚·B
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¾ã™ã€‚
+		@details æ—¢ã«ã‚ªãƒ¼ãƒ—ãƒ³ä¸­ã®ãƒ‡ãƒã‚¤ã‚¹ç•ªå·ã‚’æŒ‡å®šã™ã‚‹ã¨ä¸€åº¦ã‚¯ãƒ­ãƒ¼ã‚ºã•ã‚Œã¾ã™ã®ã§ã”æ³¨æ„ãã ã•ã„ã€‚
+		@param[in] nDeviceNo æ¤œç´¢ã—ãŸãƒ‡ãƒã‚¤ã‚¹ç•ªå·ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+		@param[out] pDeviceHandle ã‚ªãƒ¼ãƒ—ãƒ³ã—ãŸãƒ‡ãƒã‚¤ã‚¹ã‚’æ“ä½œã™ã‚‹ãŸã‚ã®ãƒãƒ³ãƒ‰ãƒ«ãŒæ ¼ç´ã•ã‚Œã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_CloseDevice
 */
 PUCRESULT WINAPI PUC_OpenDevice(UINT32 nDeviceNo, PPUC_HANDLE pDeviceHandle);
@@ -335,11 +356,11 @@ PUCRESULT WINAPI PUC_OpenDevice(UINT32 nDeviceNo, PPUC_HANDLE pDeviceHandle);
 		@note This function is thread-safe.
 		@see PUC_OpenDevice
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ğƒNƒ[ƒY‚µ‚Ü‚·B
-		@details ƒI[ƒvƒ“‚µ‚Ä‚¢‚È‚¢ƒfƒoƒCƒX‚ªw’è‚³‚ê‚é‚ÆƒGƒ‰[‚ğ•Ô‚µ‚Ü‚·B
-		@param[in] hDevice ƒNƒ[ƒY‚·‚éƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã—ã¾ã™ã€‚
+		@details ã‚ªãƒ¼ãƒ—ãƒ³ã—ã¦ã„ãªã„ãƒ‡ãƒã‚¤ã‚¹ãŒæŒ‡å®šã•ã‚Œã‚‹ã¨ã‚¨ãƒ©ãƒ¼ã‚’è¿”ã—ã¾ã™ã€‚
+		@param[in] hDevice ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_OpenDevice
 */
 PUCRESULT WINAPI PUC_CloseDevice(PUC_HANDLE hDevice);
@@ -352,11 +373,11 @@ PUCRESULT WINAPI PUC_CloseDevice(PUC_HANDLE hDevice);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌƒJƒ‰[^ƒ‚ƒmƒNƒî•ñ‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pType ƒJƒ‰[^ƒ‚ƒmƒNƒî•ñ‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ã‚«ãƒ©ãƒ¼ï¼ãƒ¢ãƒã‚¯ãƒ­æƒ…å ±ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pType ã‚«ãƒ©ãƒ¼ï¼ãƒ¢ãƒã‚¯ãƒ­æƒ…å ±ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_GetColorType(PUC_HANDLE hDevice, PUC_COLOR_TYPE* pType);
 
@@ -368,11 +389,11 @@ PUCRESULT WINAPI PUC_GetColorType(PUC_HANDLE hDevice, PUC_COLOR_TYPE* pType);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì–¼‘O‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pName ƒfƒoƒCƒX–¼‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åå‰ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pName ãƒ‡ãƒã‚¤ã‚¹åã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_GetDeviceName(PUC_HANDLE hDevice, UINT32* pName);
 
@@ -384,11 +405,11 @@ PUCRESULT WINAPI PUC_GetDeviceName(PUC_HANDLE hDevice, UINT32* pName);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ìƒ^ƒCƒv‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pType ƒfƒoƒCƒXƒ^ƒCƒv‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ã‚¿ã‚¤ãƒ—ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pType ãƒ‡ãƒã‚¤ã‚¹ã‚¿ã‚¤ãƒ—ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_GetDeviceType(PUC_HANDLE hDevice, UINT32* pType);
 
@@ -400,11 +421,11 @@ PUCRESULT WINAPI PUC_GetDeviceType(PUC_HANDLE hDevice, UINT32* pType);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ìƒo[ƒWƒ‡ƒ“‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pVersion ƒo[ƒWƒ‡ƒ“”Ô†‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pVersion ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç•ªå·ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_GetDeviceVersion(PUC_HANDLE hDevice, UINT32* pVersion);
 
@@ -416,11 +437,11 @@ PUCRESULT WINAPI PUC_GetDeviceVersion(PUC_HANDLE hDevice, UINT32* pVersion);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌƒVƒŠƒAƒ‹”Ô†‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pSerialNo ƒVƒŠƒAƒ‹”Ô†‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ã‚·ãƒªã‚¢ãƒ«ç•ªå·ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pSerialNo ã‚·ãƒªã‚¢ãƒ«ç•ªå·ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_GetSerialNo(PUC_HANDLE hDevice, UINT64* pSerialNo);
 
@@ -436,12 +457,12 @@ PUCRESULT WINAPI PUC_GetSerialNo(PUC_HANDLE hDevice, UINT64* pSerialNo);
 		@see PUC_GetMaxResolution
 		@see PUC_GetResolutionLimit
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì‰ğ‘œ“x‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pWidth ‰¡‰ğ‘œ“x‚ÌŠi”[æ
-		@param[out] pHeight c‰ğ‘œ“x‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®è§£åƒåº¦ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pWidth æ¨ªè§£åƒåº¦ã®æ ¼ç´å…ˆ
+		@param[out] pHeight ç¸¦è§£åƒåº¦ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetResolution
 		@see PUC_GetMaxResolution
 		@see PUC_GetResolutionLimit
@@ -460,12 +481,12 @@ PUCRESULT WINAPI PUC_GetResolution(PUC_HANDLE hDevice, UINT32* pWidth, UINT32* p
 		@see PUC_SetResolution
 		@see PUC_GetResolutionLimit
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌŒ»İ‚ÌB‰e‘¬“x‚Åİ’è‰Â”\‚ÈÅ‘å‰ğ‘œ“x‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pCurMaxWidth Œ»İ‚ÌB‰e‘¬“x‚Åİ’è‰Â”\‚ÈÅ‘å‰¡‰ğ‘œ“x‚ÌŠi”[æ
-		@param[out] pCurMaxHeight Œ»İ‚ÌB‰e‘¬“x‚Åİ’è‰Â”\‚ÈÅ‘åc‰ğ‘œ“x‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ç¾åœ¨ã®æ’®å½±é€Ÿåº¦ã§è¨­å®šå¯èƒ½ãªæœ€å¤§è§£åƒåº¦ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pCurMaxWidth ç¾åœ¨ã®æ’®å½±é€Ÿåº¦ã§è¨­å®šå¯èƒ½ãªæœ€å¤§æ¨ªè§£åƒåº¦ã®æ ¼ç´å…ˆ
+		@param[out] pCurMaxHeight ç¾åœ¨ã®æ’®å½±é€Ÿåº¦ã§è¨­å®šå¯èƒ½ãªæœ€å¤§ç¸¦è§£åƒåº¦ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetResolution
 		@see PUC_SetResolution
 		@see PUC_GetResolutionLimit
@@ -483,11 +504,11 @@ PUCRESULT WINAPI PUC_GetMaxResolution(PUC_HANDLE hDevice, UINT32* pCurMaxWidth, 
 		@see PUC_SetResolution
 		@see PUC_GetMaxResolution
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌŒÀŠE‰ğ‘œ“xA•ÏX‰Â”\‚ÈÅ¬’PˆÊ‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pLimitInfo ŒÀŠE‰ğ‘œ“xA•ÏX‰Â”\‚ÈÅ¬’PˆÊ‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®é™ç•Œè§£åƒåº¦ã€å¤‰æ›´å¯èƒ½ãªæœ€å°å˜ä½ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pLimitInfo é™ç•Œè§£åƒåº¦ã€å¤‰æ›´å¯èƒ½ãªæœ€å°å˜ä½ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetResolution
 		@see PUC_SetResolution
 		@see PUC_GetMaxResolution
@@ -507,13 +528,13 @@ PUCRESULT WINAPI PUC_GetResolutionLimit(PUC_HANDLE hDevice, PPUC_RESO_LIMIT_INFO
 		@see PUC_GetResolutionLimit
 		@see PUC_GetMaxResolution
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì‰ğ‘œ“x‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nWidth ‰¡‰ğ‘œ“x
-		@param[in] nHeight c‰ğ‘œ“x
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®è§£åƒåº¦ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nWidth æ¨ªè§£åƒåº¦
+		@param[in] nHeight ç¸¦è§£åƒåº¦
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetResolution
 		@see PUC_GetResolutionLimit
 		@see PUC_GetMaxResolution
@@ -531,13 +552,13 @@ PUCRESULT WINAPI PUC_SetResolution(PUC_HANDLE hDevice, UINT32 nWidth, UINT32 nHe
 		@note This function is thread-safe.
 		@see PUC_SetQuantization
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÉŠi”[‚³‚ê‚Ä‚¢‚é—Êq‰»ƒe[ƒuƒ‹ƒf[ƒ^‚ğ‚P‚Âæ“¾‚µ‚Ü‚·B
-		@details —Êq‰»ƒe[ƒuƒ‹‚ÌŒÂ”‚ÍPUC_Q_COUNT‚Å’è‹`‚³‚ê‚Ä‚¢‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nPoint —Êq‰»ƒe[ƒuƒ‹‚ÌˆÊ’u
-		@param[out] pVal —Êq‰»ƒe[ƒuƒ‹ƒf[ƒ^‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’ï¼‘ã¤å–å¾—ã—ã¾ã™ã€‚
+		@details é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ã®å€‹æ•°ã¯PUC_Q_COUNTã§å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nPoint é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ã®ä½ç½®
+		@param[out] pVal é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ‡ãƒ¼ã‚¿ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetQuantization
 */
 PUCRESULT WINAPI PUC_GetQuantization(PUC_HANDLE hDevice, UINT32 nPoint, USHORT* pVal);
@@ -553,13 +574,13 @@ PUCRESULT WINAPI PUC_GetQuantization(PUC_HANDLE hDevice, UINT32 nPoint, USHORT* 
 		@note This function is thread-safe.
 		@see PUC_GetQuantization
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÉŠi”[‚³‚ê‚Ä‚¢‚é—Êq‰»ƒe[ƒuƒ‹ƒf[ƒ^‚ğ‚P‚Â‘‚«Š·‚¦‚Ü‚·B
-		@details —Êq‰»ƒe[ƒuƒ‹‚ÌŒÂ”‚ÍPUC_Q_COUNT‚Å’è‹`‚³‚ê‚Ä‚¢‚Ü‚·B@nƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nPoint —Êq‰»ƒe[ƒuƒ‹‚ÌˆÊ’u
-		@param[in] nVal İ’è‚·‚é—Êq‰»ƒe[ƒuƒ‹ƒf[ƒ^
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’ï¼‘ã¤æ›¸ãæ›ãˆã¾ã™ã€‚
+		@details é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ã®å€‹æ•°ã¯PUC_Q_COUNTã§å®šç¾©ã•ã‚Œã¦ã„ã¾ã™ã€‚@nãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nPoint é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ã®ä½ç½®
+		@param[in] nVal è¨­å®šã™ã‚‹é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ‡ãƒ¼ã‚¿
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetQuantization
 */
 PUCRESULT WINAPI PUC_SetQuantization(PUC_HANDLE hDevice, UINT32 nPoint, USHORT nVal);
@@ -573,11 +594,11 @@ PUCRESULT WINAPI PUC_SetQuantization(PUC_HANDLE hDevice, UINT32 nPoint, USHORT n
 		@note This function is thread-safe.
 		@see PUC_SetFanState
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ìƒtƒ@ƒ“‚Ìó‘Ô‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] nState ƒtƒ@ƒ“ó‘ÔiON^OFFj‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ãƒ•ã‚¡ãƒ³ã®çŠ¶æ…‹ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] nState ãƒ•ã‚¡ãƒ³çŠ¶æ…‹ï¼ˆONï¼OFFï¼‰ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetFanState
 */
 PUCRESULT WINAPI PUC_GetFanState(PUC_HANDLE hDevice, PUC_MODE* pState);
@@ -592,12 +613,12 @@ PUCRESULT WINAPI PUC_GetFanState(PUC_HANDLE hDevice, PUC_MODE* pState);
 		@note This function is thread-safe.
 		@see PUC_GetFanState
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ìƒtƒ@ƒ“‚Ìó‘Ô‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nState ƒtƒ@ƒ“ó‘ÔiON^OFFj
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ãƒ•ã‚¡ãƒ³ã®çŠ¶æ…‹ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nState ãƒ•ã‚¡ãƒ³çŠ¶æ…‹ï¼ˆONï¼OFFï¼‰
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetFanState
 */
 PUCRESULT WINAPI PUC_SetFanState(PUC_HANDLE hDevice, PUC_MODE nState);
@@ -607,18 +628,21 @@ PUCRESULT WINAPI PUC_SetFanState(PUC_HANDLE hDevice, PUC_MODE nState);
 		@brief This retrieves the synchronous signal input mode for the device.
 		@param[in] hDevice The device handle to be controlled
 		@param[out] pMode The storage destination for the synchronous signal input mode (Internal/External)
+		@param[out] pSignal The storage destination for the polarity (positive polarity/negative polarity), 
+					@n It can be obtained only when external synchronization is set.
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_SetSyncInMode
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†“ü—Íƒ‚[ƒh‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pMode “¯ŠúM†“ü—Íƒ‚[ƒhiInternal^Externalj‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pMode åŒæœŸä¿¡å·å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ï¼ˆInternalï¼Externalï¼‰ã®æ ¼ç´å…ˆ
+		@param[out] pSignal æ¥µæ€§ï¼ˆæ­£æ¥µæ€§ï¼è² æ¥µæ€§ï¼‰ã®æ ¼ç´å…ˆã€å¤–éƒ¨åŒæœŸè¨­å®šæ™‚ã®ã¿å–å¾—ã§ãã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetSyncInMode
 */
-PUCRESULT WINAPI PUC_GetSyncInMode(PUC_HANDLE hDevice, PUC_SYNC_MODE* pMode);
+PUCRESULT WINAPI PUC_GetSyncInMode(PUC_HANDLE hDevice, PUC_SYNC_MODE* pMode, PUC_SIGNAL *pSignal);
 
 /*!
 	@~english
@@ -628,20 +652,22 @@ PUCRESULT WINAPI PUC_GetSyncInMode(PUC_HANDLE hDevice, PUC_SYNC_MODE* pMode);
 				 Set the exposure time and framerate before setting the external device synchronization.
 		@param[in] hDevice The device handle to be controlled
 		@param[in] nMode The synchronous signal input mode (Internal/External)
+		@param[in] nSignal Polarity (positive/negative), Specifying the polarity is not supported for devices prior to version 1.01.
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_GetSyncInMode
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†“ü—Íƒ‚[ƒh‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B@n“¯ŠúM†“ü—Íƒ‚[ƒh‚ğ•Ï‚¦‚é‚Æo—Í”{—¦‚Íx1”{‚É–ß‚è‚Ü‚·B
-				 @nŠO•”‹@Ší“¯Šúİ’èAŠO•”‹@Ší‚Ì‚Î‚ç‚Â‚«‚ğl—¶‚µ‚½˜IŒõŠÔ‚Ö©“®‚Å’²®‚³‚ê‚Ü‚·B‚ ‚ç‚©‚¶‚ßB‰e‚µ‚½‚¢˜IŒõŠÔ‚ÆB‰e‘¬“x‚É•ÏX‚µ‚Ä‚©‚çAŠO•”‹@Ší“¯Šú‚ğİ’è‚µ‚Ä‚­‚¾‚³‚¢B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nMode “¯ŠúM†“ü—Íƒ‚[ƒhiInternal^Externalj
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚@nåŒæœŸä¿¡å·å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰ãˆã‚‹ã¨å‡ºåŠ›å€ç‡ã¯x1å€ã«æˆ»ã‚Šã¾ã™ã€‚
+				 @nå¤–éƒ¨æ©Ÿå™¨åŒæœŸè¨­å®šæ™‚ã€å¤–éƒ¨æ©Ÿå™¨ã®ã°ã‚‰ã¤ãã‚’è€ƒæ…®ã—ãŸéœ²å…‰æ™‚é–“ã¸è‡ªå‹•ã§èª¿æ•´ã•ã‚Œã¾ã™ã€‚ã‚ã‚‰ã‹ã˜ã‚æ’®å½±ã—ãŸã„éœ²å…‰æ™‚é–“ã¨æ’®å½±é€Ÿåº¦ã«å¤‰æ›´ã—ã¦ã‹ã‚‰ã€å¤–éƒ¨æ©Ÿå™¨åŒæœŸã‚’è¨­å®šã—ã¦ãã ã•ã„ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nMode åŒæœŸä¿¡å·å…¥åŠ›ãƒ¢ãƒ¼ãƒ‰ï¼ˆInternalï¼Externalï¼‰
+		@param[in] nSignal æ¥µæ€§ï¼ˆæ­£æ¥µæ€§ï¼è² æ¥µæ€§ï¼‰ã€æ¥µæ€§ã®æŒ‡å®šã¯ãƒãƒ¼ã‚¸ãƒ§ãƒ³1.01ä»¥å‰ã®ãƒ‡ãƒã‚¤ã‚¹ã§ã¯å¯¾å¿œã—ã¦ã„ã¾ã›ã‚“ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetSyncInMode
 */
-PUCRESULT WINAPI PUC_SetSyncInMode(PUC_HANDLE hDevice, PUC_SYNC_MODE nMode);
+PUCRESULT WINAPI PUC_SetSyncInMode(PUC_HANDLE hDevice, PUC_SYNC_MODE nMode, PUC_SIGNAL nSignal);
 
 /*!
 	@~english
@@ -652,11 +678,11 @@ PUCRESULT WINAPI PUC_SetSyncInMode(PUC_HANDLE hDevice, PUC_SYNC_MODE nMode);
 		@note This function is thread-safe.
 		@see PUC_SetSyncOutSignal
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†o—Í‚Ì‹É«‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pSignal ‹É«i³‹É«^•‰‹É«j‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å‡ºåŠ›ã®æ¥µæ€§ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pSignal æ¥µæ€§ï¼ˆæ­£æ¥µæ€§ï¼è² æ¥µæ€§ï¼‰ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetSyncOutSignal
 */
 PUCRESULT WINAPI PUC_GetSyncOutSignal(PUC_HANDLE hDevice, PUC_SIGNAL* pSignal);
@@ -671,50 +697,54 @@ PUCRESULT WINAPI PUC_GetSyncOutSignal(PUC_HANDLE hDevice, PUC_SIGNAL* pSignal);
 		@note This function is thread-safe.
 		@see PUC_GetSyncOutSignal
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†o—Í‚Ì‹É«‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nSignal ‹É«i³‹É«^•‰‹É«j
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å‡ºåŠ›ã®æ¥µæ€§ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nSignal æ¥µæ€§ï¼ˆæ­£æ¥µæ€§ï¼è² æ¥µæ€§ï¼‰
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetSyncOutSignal
 */
 PUCRESULT WINAPI PUC_SetSyncOutSignal(PUC_HANDLE hDevice, PUC_SIGNAL nSignal);
 
 /*!
 	@~english
-		@brief This retrieves the delay value of device's synchronization signal output in clock units.
+		@brief This retrieves the delay value of device's synchronization signal output in nsec.
+		@n The value less than 100nsec is rounded up, so an error will occur.
 		@param[in] hDevice The device handle to be controlled
-		@param[out] pDelay The storage destination for the delay amount (clock units)
+		@param[out] pDelay The storage destination for the delay amount (nsec units)
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_SetSyncOutDelay
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†o—Í‚Ì’x‰„—Ê‚ğƒNƒƒbƒN’PˆÊ‚Åæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pDelay ’x‰„—Ê(ƒNƒƒbƒN’PˆÊ)‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å‡ºåŠ›ã®é…å»¶é‡ã‚’nsecå˜ä½ã§å–å¾—ã—ã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pDelay é…å»¶é‡(nsecå˜ä½)ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetSyncOutDelay
 */
 PUCRESULT WINAPI PUC_GetSyncOutDelay(PUC_HANDLE hDevice, UINT32* pDelay);
 
 /*!
 	@~english
-		@brief This sets the delay value of synchronization signal output for the device.
+		@brief This sets the delay value of device's synchronization signal output in nsec.
 		@details Restarting the device will reset this setting.
+		@n The value less than 100nsec is rounded up, so an error will occur.
 		@param[in] hDevice The device handle to be controlled
-		@param[in] nDelay The delay (clock units)
+		@param[in] nDelay The delay (nsec units)
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_GetSyncOutDelay
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†o—Í‚Ì’x‰„—Ê‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nDelay ’x‰„—Ê(ƒNƒƒbƒN’PˆÊ)
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å‡ºåŠ›ã®é…å»¶é‡ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nDelay é…å»¶é‡(nsecå˜ä½)
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetSyncOutDelay
 */
 PUCRESULT WINAPI PUC_SetSyncOutDelay(PUC_HANDLE hDevice, UINT32 nDelay);
@@ -722,17 +752,19 @@ PUCRESULT WINAPI PUC_SetSyncOutDelay(PUC_HANDLE hDevice, UINT32 nDelay);
 /*!
 	@~english
 		@brief This retrieves the output width of synchronization signal for the device.
+		@n If it is less than 100nsec, it will be rounded up and an error will occur.
 		@param[in] hDevice The device handle to be controlled
-		@param[out] pWidth The storage destination for the output width (clock units)
+		@param[out] pWidth The storage destination for the output width (nsec units)
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_SetSyncOutWidth
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†o—Í‚Ìo—Í•‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pWidth o—Í•(ƒNƒƒbƒN’PˆÊ)‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å‡ºåŠ›ã®å‡ºåŠ›å¹…ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pWidth å‡ºåŠ›å¹…(nsecå˜ä½)ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetSyncOutWidth
 */
 PUCRESULT WINAPI PUC_GetSyncOutWidth(PUC_HANDLE hDevice, UINT32* pWidth);
@@ -740,19 +772,23 @@ PUCRESULT WINAPI PUC_GetSyncOutWidth(PUC_HANDLE hDevice, UINT32* pWidth);
 /*!
 	@~english
 		@brief This sets the output width of synchronization signal for the device.
-		@details Restarting the device will reset this setting. @n Changing the output width resets the output magnification rate to x1.
+		@details Restarting the device will reset this setting. 
+		@n Changing the output width resets the output magnification rate to x1.
+		@n If it is less than 100nsec, it will be rounded up and an error will occur.
 		@param[in] hDevice The device handle to be controlled
-		@param[in] nWidth The output width of the synchronous signal (clock units).
+		@param[in] nWidth The output width of the synchronous signal (nsec units).
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_GetSyncOutWidth
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“¯ŠúM†o—Í‚Ìo—Í•‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B@no—Í•‚ğ•Ï‚¦‚é‚Æo—Í”{—¦‚Íx1”{‚É–ß‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nWidth “¯ŠúM†‚Ìo—Í•(ƒNƒƒbƒN’PˆÊ)B
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®åŒæœŸä¿¡å·å‡ºåŠ›ã®å‡ºåŠ›å¹…ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@n å‡ºåŠ›å¹…ã‚’å¤‰ãˆã‚‹ã¨å‡ºåŠ›å€ç‡ã¯x1å€ã«æˆ»ã‚Šã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nWidth åŒæœŸä¿¡å·ã®å‡ºåŠ›å¹…(nsecå˜ä½)ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetSyncOutWidth
 */
 PUCRESULT WINAPI PUC_SetSyncOutWidth(PUC_HANDLE hDevice, UINT32 nWidth);
@@ -768,11 +804,11 @@ PUCRESULT WINAPI PUC_SetSyncOutWidth(PUC_HANDLE hDevice, UINT32 nWidth);
 		@see PUC_SetSyncOutWidth
 		@see PUC_GetSyncOutWidth
 	@~japanese
-		@brief “¯ŠúM†‚Ìo—Í”{—¦‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pMagnification o—Í”{—¦‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief åŒæœŸä¿¡å·ã®å‡ºåŠ›å€ç‡ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pMagnification å‡ºåŠ›å€ç‡ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetSyncOutMagnification
 		@see PUC_SetSyncOutWidth
 		@see PUC_GetSyncOutWidth
@@ -791,12 +827,12 @@ PUCRESULT WINAPI PUC_GetSyncOutMagnification(PUC_HANDLE hDevice, UINT32* pMagnif
 		@see PUC_SetSyncOutWidth
 		@see PUC_GetSyncOutWidth
 	@~japanese
-		@brief “¯ŠúM†‚Ìo—Í”{—¦‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B@nB‰e‘¬“x‚â˜IŒõE”ñ˜IŒõŠúŠÔ‚ğ•ÏX‚µ‚½ê‡‚àx1”{‚ÉƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nMagnification o—Í”{—¦i—áFx2‚Ìê‡‚Í2Ax4‚Ìê‡‚Í4j0.5”{‚Ìê‡‚ÍPUC_SYNC_OUT_MAGNIFICATION_0_5‚ğw’è
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief åŒæœŸä¿¡å·ã®å‡ºåŠ›å€ç‡ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚@næ’®å½±é€Ÿåº¦ã‚„éœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’å¤‰æ›´ã—ãŸå ´åˆã‚‚x1å€ã«ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nMagnification å‡ºåŠ›å€ç‡ï¼ˆä¾‹ï¼šx2ã®å ´åˆã¯2ã€x4ã®å ´åˆã¯4ï¼‰0.5å€ã®å ´åˆã¯PUC_SYNC_OUT_MAGNIFICATION_0_5ã‚’æŒ‡å®š
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetSyncOutMagnification
 		@see PUC_SetSyncOutWidth
 		@see PUC_GetSyncOutWidth
@@ -812,11 +848,11 @@ PUCRESULT WINAPI PUC_SetSyncOutMagnification(PUC_HANDLE hDevice, UINT32 nMagnifi
 		@note This function is thread-safe.
 		@see PUC_SetLEDMode
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌLEDó‘Ô‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pMode LED‚Ìó‘ÔiON^OFFj‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®LEDçŠ¶æ…‹ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pMode LEDã®çŠ¶æ…‹ï¼ˆONï¼OFFï¼‰ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetLEDMode
 */
 PUCRESULT WINAPI PUC_GetLEDMode(PUC_HANDLE hDevice, PUC_MODE* pMode);
@@ -831,12 +867,12 @@ PUCRESULT WINAPI PUC_GetLEDMode(PUC_HANDLE hDevice, PUC_MODE* pMode);
 		@note This function is thread-safe.
 		@see PUC_GetLEDMode
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌLEDó‘Ô‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ğÄ‹N“®‚·‚é‚Æİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nMode LED‚Ìó‘ÔiON^OFFj
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®LEDçŠ¶æ…‹ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’å†èµ·å‹•ã™ã‚‹ã¨è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nMode LEDã®çŠ¶æ…‹ï¼ˆONï¼OFFï¼‰
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetLEDMode
 */
 PUCRESULT WINAPI PUC_SetLEDMode(PUC_HANDLE hDevice, PUC_MODE nMode);
@@ -849,11 +885,11 @@ PUCRESULT WINAPI PUC_SetLEDMode(PUC_HANDLE hDevice, PUC_MODE nMode);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌƒZƒ“ƒT[‰·“x‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pTemp ƒZƒ“ƒT[‚Ì‰·“x‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®ã‚»ãƒ³ã‚µãƒ¼æ¸©åº¦ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pTemp ã‚»ãƒ³ã‚µãƒ¼ã®æ¸©åº¦ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_GetSensorTemperature(PUC_HANDLE hDevice, UINT32* pTemp);
 
@@ -866,11 +902,11 @@ PUCRESULT WINAPI PUC_GetSensorTemperature(PUC_HANDLE hDevice, UINT32* pTemp);
 		@note This function is thread-safe.
 		@see PUC_SetXferDataMode
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“]‘—ƒf[ƒ^ƒ‚[ƒh‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pDataMode ƒf[ƒ^ƒ‚[ƒh‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®è»¢é€ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pDataMode ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetXferDataMode
 */
 PUCRESULT WINAPI PUC_GetXferDataMode(PUC_HANDLE hDevice, PUC_DATA_MODE* pDataMode);
@@ -885,12 +921,12 @@ PUCRESULT WINAPI PUC_GetXferDataMode(PUC_HANDLE hDevice, PUC_DATA_MODE* pDataMod
 		@note This function is thread-safe. If PUC_DATA_DECOMPRESSED_GRAY is specified, decoding will be performed in a single thread.
 		@see PUC_GetXferDataMode
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“]‘—ƒf[ƒ^ƒ‚[ƒh‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nDataMode ƒf[ƒ^ƒ‚[ƒh
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·BPUC_DATA_DECOMPRESSED_GRAY‚ğw’è‚µ‚½ê‡ƒfƒR[ƒh‚ÍƒVƒ“ƒOƒ‹ƒXƒŒƒbƒh‚Ås‚í‚ê‚Ü‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®è»¢é€ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nDataMode ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚PUC_DATA_DECOMPRESSED_GRAYã‚’æŒ‡å®šã—ãŸå ´åˆãƒ‡ã‚³ãƒ¼ãƒ‰ã¯ã‚·ãƒ³ã‚°ãƒ«ã‚¹ãƒ¬ãƒƒãƒ‰ã§è¡Œã‚ã‚Œã¾ã™ã€‚
 		@see PUC_GetXferDataMode
 */
 PUCRESULT WINAPI PUC_SetXferDataMode(PUC_HANDLE hDevice, PUC_DATA_MODE nDataMode);
@@ -906,13 +942,13 @@ PUCRESULT WINAPI PUC_SetXferDataMode(PUC_HANDLE hDevice, PUC_DATA_MODE nDataMode
 		@note This function is thread-safe.
 		@see PUC_GetMaxXferDataSize
 	@~japanese
-		@brief ƒfƒoƒCƒX‚©‚ç“]‘—‚³‚ê‚éƒf[ƒ^ƒTƒCƒY‚ğæ“¾‚µ‚Ü‚·B
-		@details Œ»İ‚Ì‰ğ‘œ“x‚É‚æ‚èŒ‹‰Ê‚ªˆÙ‚È‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nDataMode ƒf[ƒ^ƒ‚[ƒhB‚±‚±‚Åw’è‚³‚ê‚½ƒ‚[ƒh‚É‘Î‚·‚éƒf[ƒ^ƒTƒCƒY‚ğ•Ô‹p‚µ‚Ü‚·B
-		@param[out] pDataSize ƒf[ƒ^ƒTƒCƒY‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰è»¢é€ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã‚’å–å¾—ã—ã¾ã™ã€‚
+		@details ç¾åœ¨ã®è§£åƒåº¦ã«ã‚ˆã‚ŠçµæœãŒç•°ãªã‚Šã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nDataMode ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰ã€‚ã“ã“ã§æŒ‡å®šã•ã‚ŒãŸãƒ¢ãƒ¼ãƒ‰ã«å¯¾ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã‚’è¿”å´ã—ã¾ã™ã€‚
+		@param[out] pDataSize ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetMaxXferDataSize
 */
 PUCRESULT WINAPI PUC_GetXferDataSize(PUC_HANDLE hDevice, PUC_DATA_MODE nDataMode, UINT32* pDataSize);
@@ -928,13 +964,13 @@ PUCRESULT WINAPI PUC_GetXferDataSize(PUC_HANDLE hDevice, PUC_DATA_MODE nDataMode
 		@note This function is thread-safe.
 		@see PUC_GetXferDataSize
 	@~japanese
-		@brief ƒfƒoƒCƒX‚©‚ç“]‘—‚³‚ê‚éƒf[ƒ^‚ÌÅ‘åƒTƒCƒY‚ğæ“¾‚µ‚Ü‚·B
-		@details Œ»İ‚Ì‰ğ‘œ“x‚É‚æ‚èŒ‹‰Ê‚ªˆÙ‚È‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nDataMode ƒf[ƒ^ƒ‚[ƒhB‚±‚±‚Åw’è‚³‚ê‚½ƒ‚[ƒh‚É‘Î‚·‚éƒf[ƒ^ƒTƒCƒY‚ğ•Ô‹p‚µ‚Ü‚·B
-		@param[out] pDataSize Å‘åƒf[ƒ^ƒTƒCƒY‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰è»¢é€ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®æœ€å¤§ã‚µã‚¤ã‚ºã‚’å–å¾—ã—ã¾ã™ã€‚
+		@details ç¾åœ¨ã®è§£åƒåº¦ã«ã‚ˆã‚ŠçµæœãŒç•°ãªã‚Šã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nDataMode ãƒ‡ãƒ¼ã‚¿ãƒ¢ãƒ¼ãƒ‰ã€‚ã“ã“ã§æŒ‡å®šã•ã‚ŒãŸãƒ¢ãƒ¼ãƒ‰ã«å¯¾ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã‚’è¿”å´ã—ã¾ã™ã€‚
+		@param[out] pDataSize æœ€å¤§ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚ºã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetXferDataSize
 */
 PUCRESULT WINAPI PUC_GetMaxXferDataSize(PUC_HANDLE hDevice, PUC_DATA_MODE nDataMode, UINT32* pDataSize);
@@ -954,16 +990,16 @@ PUCRESULT WINAPI PUC_GetMaxXferDataSize(PUC_HANDLE hDevice, PUC_DATA_MODE nDataM
 		@see PUC_GetXferDataSize
 		@see PUC_DecodeData
 	@~japanese
-		@brief ƒfƒoƒCƒX‚©‚çÅV‚Ìƒ‰ƒCƒu‰æ‘œ‚ğ1–‡æ“¾‚µ‚Ü‚·B
-		@details ˜A‘±“]‘—’†‚Í‰æ‘œ‚ªˆê•”—‚ê‚éê‡‚ª‚ ‚è‚Ü‚·B@n
-			‰æ‘œƒf[ƒ^‚ÌƒTƒCƒY‚ÍPUC_GetXferDataSize‚Åæ“¾‚µ‚Ä‚­‚¾‚³‚¢B@n
-			æ“¾‚·‚é‰æ‘œ‚Ìí—Ş‚ÍPUC_SetXferDataMode‚Åİ’è‚Å‚«‚Ü‚·B@n
-			ˆ³kƒf[ƒ^‚ÍPUC_DecodeData‚ğg—p‚·‚é‚±‚Æ‚Å‹P“xƒf[ƒ^‚É“WŠJ‚Å‚«‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pXferData “]‘—ƒf[ƒ^‚ÌŠi”[æB•K—v‚Èƒƒ‚ƒŠƒTƒCƒY‚ÍPUC_GetXferDataSize‚Åæ“¾‚µ‚Ä‚­‚¾‚³‚¢B@n
-			PUC_DATA_DECOMPRESSED_GRAY‚Ìê‡A‰¡•‚Í4‚Ì”{”‚ÉØ‚èã‚°‚½ƒTƒCƒY•ªŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰æœ€æ–°ã®ãƒ©ã‚¤ãƒ–ç”»åƒã‚’1æšå–å¾—ã—ã¾ã™ã€‚
+		@details é€£ç¶šè»¢é€ä¸­ã¯ç”»åƒãŒä¸€éƒ¨ä¹±ã‚Œã‚‹å ´åˆãŒã‚ã‚Šã¾ã™ã€‚@n
+			ç”»åƒãƒ‡ãƒ¼ã‚¿ã®ã‚µã‚¤ã‚ºã¯PUC_GetXferDataSizeã§å–å¾—ã—ã¦ãã ã•ã„ã€‚@n
+			å–å¾—ã™ã‚‹ç”»åƒã®ç¨®é¡ã¯PUC_SetXferDataModeã§è¨­å®šã§ãã¾ã™ã€‚@n
+			åœ§ç¸®ãƒ‡ãƒ¼ã‚¿ã¯PUC_DecodeDataã‚’ä½¿ç”¨ã™ã‚‹ã“ã¨ã§è¼åº¦ãƒ‡ãƒ¼ã‚¿ã«å±•é–‹ã§ãã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pXferData è»¢é€ãƒ‡ãƒ¼ã‚¿ã®æ ¼ç´å…ˆã€‚å¿…è¦ãªãƒ¡ãƒ¢ãƒªã‚µã‚¤ã‚ºã¯PUC_GetXferDataSizeã§å–å¾—ã—ã¦ãã ã•ã„ã€‚@n
+			PUC_DATA_DECOMPRESSED_GRAYã®å ´åˆã€æ¨ªå¹…ã¯4ã®å€æ•°ã«åˆ‡ã‚Šä¸Šã’ãŸã‚µã‚¤ã‚ºåˆ†ç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetXferDataSize
 		@see PUC_DecodeData
 */
@@ -984,14 +1020,14 @@ PUCRESULT WINAPI PUC_GetSingleXferData(PUC_HANDLE hDevice, PPUC_XFER_DATA_INFO p
 		@see PUC_SetRingBufferCount
 		@see PUC_DecodeData
 	@~japanese
-		@brief ˜A‘±“]‘—‚ğn‚ß‚Ü‚·B
-		@details ƒR[ƒ‹ƒoƒbƒNŠÖ”‚Ìˆ—ŠÔ‚ª’·‚¢ê‡APUC_SetRingBufferCount‚Åİ’è‚µ‚½ƒŠƒ“ƒOƒoƒbƒtƒ@“à‚É‡Ÿ‰æ‘œƒf[ƒ^‚ªŠi”[‚³‚ê‚Ü‚·B@n
-			ƒŠƒ“ƒOƒoƒbƒtƒ@‚ªˆê„‚·‚é‚ÆƒR[ƒ‹ƒoƒbƒNŠÖ”‚Ìˆ—Š®—¹‘Ò‚¿‚Æ‚È‚èA‚±‚ÌŠÔ‚ÌóMƒf[ƒ^‚Íƒoƒbƒtƒ@‚ÉŠi”[‚³‚ê‚Ü‚¹‚ñ‚Ì‚Å‚²’ˆÓ‚­‚¾‚³‚¢BiƒtƒŒ[ƒ€—‚¿j
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] callback SDK“à•”‚ÅƒfƒoƒCƒX‚©‚ç1–‡‰æ‘œ‚ğóM‚·‚é‚½‚ÑA‚±‚ÌƒR[ƒ‹ƒoƒbƒNŠÖ”‚ªŒÄ‚Î‚ê‚Ü‚·B
-		@param[in] arg ƒR[ƒ‹ƒoƒbƒNŠÖ”‚É“n‚·ˆø”
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief é€£ç¶šè»¢é€ã‚’å§‹ã‚ã¾ã™ã€‚
+		@details ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®å‡¦ç†æ™‚é–“ãŒé•·ã„å ´åˆã€PUC_SetRingBufferCountã§è¨­å®šã—ãŸãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡å†…ã«é †æ¬¡ç”»åƒãƒ‡ãƒ¼ã‚¿ãŒæ ¼ç´ã•ã‚Œã¾ã™ã€‚@n
+			ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡ãŒä¸€å·¡ã™ã‚‹ã¨ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã®å‡¦ç†å®Œäº†å¾…ã¡ã¨ãªã‚Šã€ã“ã®é–“ã®å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã¯ãƒãƒƒãƒ•ã‚¡ã«æ ¼ç´ã•ã‚Œã¾ã›ã‚“ã®ã§ã”æ³¨æ„ãã ã•ã„ã€‚ï¼ˆãƒ•ãƒ¬ãƒ¼ãƒ è½ã¡ï¼‰
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] callback SDKå†…éƒ¨ã§ãƒ‡ãƒã‚¤ã‚¹ã‹ã‚‰1æšç”»åƒã‚’å—ä¿¡ã™ã‚‹ãŸã³ã€ã“ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ãŒå‘¼ã°ã‚Œã¾ã™ã€‚
+		@param[in] arg ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã«æ¸¡ã™å¼•æ•°
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_EndXferData
 		@see PUC_IsXferring
 		@see PUC_SetRingBufferCount
@@ -1008,10 +1044,10 @@ PUCRESULT WINAPI PUC_BeginXferData(PUC_HANDLE hDevice, RECIEVE_CALLBACK callback
 		@see PUC_BeginXferData
 		@see PUC_IsXferring
 	@~japanese
-		@brief ˜A‘±“]‘—‚ğI—¹‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief é€£ç¶šè»¢é€ã‚’çµ‚äº†ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_BeginXferData
 		@see PUC_IsXferring
 */
@@ -1027,11 +1063,11 @@ PUCRESULT WINAPI PUC_EndXferData(PUC_HANDLE hDevice);
 		@see PUC_BeginXferData
 		@see PUC_EndXferData
 	@~japanese
-		@brief ˜A‘±“]‘—’†‚©‚Ç‚¤‚©‚ğŠm”F‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pIsXferring ˜A‘±“]‘—’†‚Ìê‡‚ÉTRUEA‚»‚êˆÈŠO‚ÍFALSE‚ğŠi”[‚µ‚Ü‚·B
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief é€£ç¶šè»¢é€ä¸­ã‹ã©ã†ã‹ã‚’ç¢ºèªã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pIsXferring é€£ç¶šè»¢é€ä¸­ã®å ´åˆã«TRUEã€ãã‚Œä»¥å¤–ã¯FALSEã‚’æ ¼ç´ã—ã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_BeginXferData
 		@see PUC_EndXferData
 */
@@ -1047,13 +1083,13 @@ PUCRESULT WINAPI PUC_IsXferring(PUC_HANDLE hDevice, BOOL* pIsXferring);
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe. This function can be executed in parallel.
 	@~japanese
-		@brief ˆ³k‰æ‘œƒf[ƒ^‚©‚çƒV[ƒPƒ“ƒX”Ô†‚ğ’Šo‚µ‚Ü‚·B
-		@param[in] pData ˆ³k‰æ‘œƒf[ƒ^
-		@param[in] nWidth ‰æ‘œ‚Ì‰¡•
-		@param[in] nHeight ‰æ‘œ‚Ì‚‚³
-		@param[out] pSeqNo ’Šo‚µ‚½ƒV[ƒPƒ“ƒX”Ô†‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B–{ŠÖ”‚Í•À—ñÀs‚ª‰Â”\‚Å‚·B
+		@brief åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿ã‹ã‚‰ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ç•ªå·ã‚’æŠ½å‡ºã—ã¾ã™ã€‚
+		@param[in] pData åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿
+		@param[in] nWidth ç”»åƒã®æ¨ªå¹…
+		@param[in] nHeight ç”»åƒã®é«˜ã•
+		@param[out] pSeqNo æŠ½å‡ºã—ãŸã‚·ãƒ¼ã‚±ãƒ³ã‚¹ç•ªå·ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚æœ¬é–¢æ•°ã¯ä¸¦åˆ—å®Ÿè¡ŒãŒå¯èƒ½ã§ã™ã€‚
 */
 PUCRESULT WINAPI PUC_ExtractSequenceNo(const PUCHAR pData, UINT32 nWidth, UINT32 nHeight, PUSHORT pSeqNo);
 
@@ -1073,17 +1109,17 @@ PUCRESULT WINAPI PUC_ExtractSequenceNo(const PUCHAR pData, UINT32 nWidth, UINT32
 		@see PUC_GetXferDataSize
 		@see PUC_GetMaxXferDataSize
 	@~japanese
-		@brief ˆ³k‰æ‘œƒf[ƒ^‚ğ‹P“x’lƒf[ƒ^‚É“WŠJ‚µ‚Ü‚·B
-		@param[out] pDst “WŠJæƒoƒbƒtƒ@B‰¡•‚Í4‚Ì”{”‚ÉØ‚èã‚°‚½ƒTƒCƒY•ªŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·Bi—áF‰¡•‚ª1246px‚Ìê‡Aƒoƒbƒtƒ@‚Í1248ƒoƒCƒgŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ ‚èj
-		@param[in] nX “WŠJŠJn‚·‚é¶ãÀ•WXB0‚à‚µ‚­‚Í8‚Ì”{”‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@param[in] nY “WŠJŠJn‚·‚é¶ãÀ•WYB0‚à‚µ‚­‚Í8‚Ì”{”‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@param[in] nWidth “WŠJ‚·‚é‰¡•
-		@param[in] nHeight “WŠJ‚·‚é‚‚³
-		@param[in] nLineBytes “WŠJæƒoƒbƒtƒ@‚Ì‰¡•‚ÌƒoƒCƒg”
-		@param[in] pSrc ˆ³k‰æ‘œƒf[ƒ^
-		@param[in] pQVals —Êq‰»ƒe[ƒuƒ‹
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B–{ŠÖ”‚Í•À—ñÀs‚ª‰Â”\‚Å‚·B
+		@brief åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’è¼åº¦å€¤ãƒ‡ãƒ¼ã‚¿ã«å±•é–‹ã—ã¾ã™ã€‚
+		@param[out] pDst å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã€‚æ¨ªå¹…ã¯4ã®å€æ•°ã«åˆ‡ã‚Šä¸Šã’ãŸã‚µã‚¤ã‚ºåˆ†ç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚ï¼ˆä¾‹ï¼šæ¨ªå¹…ãŒ1246pxã®å ´åˆã€ãƒãƒƒãƒ•ã‚¡ã¯1248ãƒã‚¤ãƒˆç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ã‚ã‚Šï¼‰
+		@param[in] nX å±•é–‹é–‹å§‹ã™ã‚‹å·¦ä¸Šåº§æ¨™Xã€‚0ã‚‚ã—ãã¯8ã®å€æ•°ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nY å±•é–‹é–‹å§‹ã™ã‚‹å·¦ä¸Šåº§æ¨™Yã€‚0ã‚‚ã—ãã¯8ã®å€æ•°ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nWidth å±•é–‹ã™ã‚‹æ¨ªå¹…
+		@param[in] nHeight å±•é–‹ã™ã‚‹é«˜ã•
+		@param[in] nLineBytes å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã®æ¨ªå¹…ã®ãƒã‚¤ãƒˆæ•°
+		@param[in] pSrc åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿
+		@param[in] pQVals é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚æœ¬é–¢æ•°ã¯ä¸¦åˆ—å®Ÿè¡ŒãŒå¯èƒ½ã§ã™ã€‚
 		@see PUC_GetXferDataSize
 		@see PUC_GetMaxXferDataSize
 */
@@ -1107,18 +1143,18 @@ PUCRESULT WINAPI PUC_DecodeData(PUINT8 pDst, UINT32 nX, UINT32 nY, UINT32 nWidth
 		@see PUC_GetMaxXferDataSize
 		@see PUC_DecodeData
 	@~japanese
-		@brief ˆ³k‰æ‘œƒf[ƒ^‚ğ‹P“x’lƒf[ƒ^‚É“WŠJ‚µ‚Ü‚·B‚±‚ÌƒfƒR[ƒhˆ—‚Íƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‚Ås‚í‚ê‚Ü‚·B
-		@param[out] pDst “WŠJæƒoƒbƒtƒ@B‰¡•‚Í4‚Ì”{”‚ÉØ‚èã‚°‚½ƒTƒCƒY•ªŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·Bi—áF‰¡•‚ª1246px‚Ìê‡Aƒoƒbƒtƒ@‚Í1248ƒoƒCƒgŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ ‚èj
-		@param[in] nX “WŠJŠJn‚·‚é¶ãÀ•WXB0‚à‚µ‚­‚Í8‚Ì”{”‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@param[in] nY “WŠJŠJn‚·‚é¶ãÀ•WYB0‚à‚µ‚­‚Í8‚Ì”{”‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@param[in] nWidth “WŠJ‚·‚é‰¡•
-		@param[in] nHeight “WŠJ‚·‚é‚‚³
-		@param[in] nLineBytes “WŠJæƒoƒbƒtƒ@‚Ì‰¡•‚ÌƒoƒCƒg”
-		@param[in] pSrc ˆ³k‰æ‘œƒf[ƒ^
-		@param[in] pQVals —Êq‰»ƒe[ƒuƒ‹
-		@param[in] nThreadCount ƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‚Åˆ—‚·‚éƒXƒŒƒbƒh”
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B–{ŠÖ”‚Í•À—ñÀs‚ª‰Â”\‚Å‚·B
+		@brief åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’è¼åº¦å€¤ãƒ‡ãƒ¼ã‚¿ã«å±•é–‹ã—ã¾ã™ã€‚ã“ã®ãƒ‡ã‚³ãƒ¼ãƒ‰å‡¦ç†ã¯ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã§è¡Œã‚ã‚Œã¾ã™ã€‚
+		@param[out] pDst å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã€‚æ¨ªå¹…ã¯4ã®å€æ•°ã«åˆ‡ã‚Šä¸Šã’ãŸã‚µã‚¤ã‚ºåˆ†ç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚ï¼ˆä¾‹ï¼šæ¨ªå¹…ãŒ1246pxã®å ´åˆã€ãƒãƒƒãƒ•ã‚¡ã¯1248ãƒã‚¤ãƒˆç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ã‚ã‚Šï¼‰
+		@param[in] nX å±•é–‹é–‹å§‹ã™ã‚‹å·¦ä¸Šåº§æ¨™Xã€‚0ã‚‚ã—ãã¯8ã®å€æ•°ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nY å±•é–‹é–‹å§‹ã™ã‚‹å·¦ä¸Šåº§æ¨™Yã€‚0ã‚‚ã—ãã¯8ã®å€æ•°ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nWidth å±•é–‹ã™ã‚‹æ¨ªå¹…
+		@param[in] nHeight å±•é–‹ã™ã‚‹é«˜ã•
+		@param[in] nLineBytes å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã®æ¨ªå¹…ã®ãƒã‚¤ãƒˆæ•°
+		@param[in] pSrc åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿
+		@param[in] pQVals é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«
+		@param[in] nThreadCount ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã§å‡¦ç†ã™ã‚‹ã‚¹ãƒ¬ãƒƒãƒ‰æ•°
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚æœ¬é–¢æ•°ã¯ä¸¦åˆ—å®Ÿè¡ŒãŒå¯èƒ½ã§ã™ã€‚
 		@see PUC_GetXferDataSize
 		@see PUC_GetMaxXferDataSize
 		@see PUC_DecodeData
@@ -1141,21 +1177,50 @@ PUCRESULT WINAPI PUC_DecodeDataMultiThread(PUINT8 pDst, UINT32 nX, UINT32 nY, UI
 		@see PUC_GetXferDataSize
 		@see PUC_GetMaxXferDataSize
 	@~japanese
-		@brief ˆ³k‰æ‘œƒf[ƒ^‚ğDCTŒW”‚É“WŠJ‚µ‚Ü‚·B
-		@param[out] pDst “WŠJæƒoƒbƒtƒ@B‰¡•‚Í4‚Ì”{”‚ÉØ‚èã‚°‚½ƒTƒCƒY•ªŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·Bi—áF‰¡•‚ª1246px‚Ìê‡Aƒoƒbƒtƒ@‚Í1248ƒoƒCƒgŠm•Û‚³‚ê‚Ä‚¢‚é•K—v‚ ‚èj
-		@param[in] nX “WŠJŠJn‚·‚é¶ãÀ•WXB0‚à‚µ‚­‚Í8‚Ì”{”‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@param[in] nY “WŠJŠJn‚·‚é¶ãÀ•WYB0‚à‚µ‚­‚Í8‚Ì”{”‚Å‚ ‚é•K—v‚ª‚ ‚è‚Ü‚·B
-		@param[in] nWidth “WŠJ‚·‚é‰¡•
-		@param[in] nHeight “WŠJ‚·‚é‚‚³
-		@param[in] nLineBytes “WŠJæƒoƒbƒtƒ@‚Ì‰¡•‚ÌƒoƒCƒg”
-		@param[in] pSrc ˆ³k‰æ‘œƒf[ƒ^
-		@param[in] pQVals —Êq‰»ƒe[ƒuƒ‹
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B–{ŠÖ”‚Í•À—ñÀs‚ª‰Â”\‚Å‚·B
+		@brief åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿ã‚’DCTä¿‚æ•°ã«å±•é–‹ã—ã¾ã™ã€‚
+		@param[out] pDst å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã€‚æ¨ªå¹…ã¯4ã®å€æ•°ã«åˆ‡ã‚Šä¸Šã’ãŸã‚µã‚¤ã‚ºåˆ†ç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚ï¼ˆä¾‹ï¼šæ¨ªå¹…ãŒ1246pxã®å ´åˆã€ãƒãƒƒãƒ•ã‚¡ã¯1248ãƒã‚¤ãƒˆç¢ºä¿ã•ã‚Œã¦ã„ã‚‹å¿…è¦ã‚ã‚Šï¼‰
+		@param[in] nX å±•é–‹é–‹å§‹ã™ã‚‹å·¦ä¸Šåº§æ¨™Xã€‚0ã‚‚ã—ãã¯8ã®å€æ•°ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nY å±•é–‹é–‹å§‹ã™ã‚‹å·¦ä¸Šåº§æ¨™Yã€‚0ã‚‚ã—ãã¯8ã®å€æ•°ã§ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nWidth å±•é–‹ã™ã‚‹æ¨ªå¹…
+		@param[in] nHeight å±•é–‹ã™ã‚‹é«˜ã•
+		@param[in] nLineBytes å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã®æ¨ªå¹…ã®ãƒã‚¤ãƒˆæ•°
+		@param[in] pSrc åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿
+		@param[in] pQVals é‡å­åŒ–ãƒ†ãƒ¼ãƒ–ãƒ«
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚æœ¬é–¢æ•°ã¯ä¸¦åˆ—å®Ÿè¡ŒãŒå¯èƒ½ã§ã™ã€‚
 		@see PUC_GetXferDataSize
 		@see PUC_GetMaxXferDataSize
 */
 PUCRESULT WINAPI PUC_DecodeDCTData(PINT16 pDst, UINT32 nX, UINT32 nY, UINT32 nWidth, UINT32 nHeight, UINT32 nLineBytes, const PUINT8 pSrc, const PUSHORT pQVals);
+
+/*!
+	@~english
+		@brief Decodes the DC component of compressed image data.
+		@param[out] pDst The buffer at the decoding destination. Must be allocated for the total number of blocks included in the decoding range.
+		@param[in] nBlockX The block coordinates X for starting decoding
+		@param[in] nBlockY The block coordinates Y for starting decoding
+		@param[in] nBlockCountX Number of blocks in the X direction to be decoded
+		@param[in] nBlockCountY Number of blocks in the Y direction to be decoded
+		@param[in] pSrc The compressed image data
+		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
+		@note This function is thread-safe. This function can be executed in parallel.
+		@see PUC_GetXferDataSize
+		@see PUC_GetMaxXferDataSize
+	@~japanese
+		@brief åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿ã®DCæˆåˆ†ã‚’å±•é–‹ã—ã¾ã™ã€‚
+		@param[out] pDst å±•é–‹å…ˆãƒãƒƒãƒ•ã‚¡ã€‚ãƒ‡ã‚³ãƒ¼ãƒ‰ç¯„å›²ã«å«ã¾ã‚Œã‚‹ãƒ–ãƒ­ãƒƒã‚¯ã®ç·æ•°ã ã‘ç¢ºä¿ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+		@param[in] nBlockX å±•é–‹é–‹å§‹ã™ã‚‹ãƒ–ãƒ­ãƒƒã‚¯åº§æ¨™Xã€‚
+		@param[in] nBlockY å±•é–‹é–‹å§‹ã™ã‚‹ãƒ–ãƒ­ãƒƒã‚¯åº§æ¨™Yã€‚
+		@param[in] nBlockCountX å±•é–‹ã™ã‚‹Xæ–¹å‘ã®ãƒ–ãƒ­ãƒƒã‚¯æ•°
+		@param[in] nBlockCountY å±•é–‹ã™ã‚‹Yæ–¹å‘ã®ãƒ–ãƒ­ãƒƒã‚¯æ•°
+		@param[in] pSrc åœ§ç¸®ç”»åƒãƒ‡ãƒ¼ã‚¿
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚æœ¬é–¢æ•°ã¯ä¸¦åˆ—å®Ÿè¡ŒãŒå¯èƒ½ã§ã™ã€‚
+		@see PUC_GetXferDataSize
+		@see PUC_GetMaxXferDataSize
+*/
+PUCRESULT WINAPI PUC_DecodeDCData(PUINT8 pDst, UINT32 nBlockX, UINT32 nBlockY, UINT32 nBlockCountX, UINT32 nBlockCountY, const PUINT8 pSrc);
+
 
 /*!
 	@~english
@@ -1166,11 +1231,11 @@ PUCRESULT WINAPI PUC_DecodeDCTData(PINT16 pDst, UINT32 nX, UINT32 nY, UINT32 nWi
 		@note This function is thread-safe.
 		@see PUC_SetRingBufferCount
 	@~japanese
-		@brief ˜A‘±“]‘—‚ÌƒŠƒ“ƒOƒoƒbƒtƒ@”‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pCount ƒoƒbƒtƒ@”‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief é€£ç¶šè»¢é€æ™‚ã®ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡æ•°ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pCount ãƒãƒƒãƒ•ã‚¡æ•°ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetRingBufferCount
 */
 PUCRESULT WINAPI PUC_GetRingBufferCount(PUC_HANDLE hDevice, UINT32* pCount);
@@ -1185,12 +1250,12 @@ PUCRESULT WINAPI PUC_GetRingBufferCount(PUC_HANDLE hDevice, UINT32* pCount);
 		@note This function is thread-safe.
 		@see PUC_GetRingBufferCount
 	@~japanese
-		@brief ˜A‘±“]‘—‚ÌƒŠƒ“ƒOƒoƒbƒtƒ@”‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nCount ƒoƒbƒtƒ@”
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief é€£ç¶šè»¢é€æ™‚ã®ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡æ•°ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nCount ãƒãƒƒãƒ•ã‚¡æ•°
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetRingBufferCount
 */
 PUCRESULT WINAPI PUC_SetRingBufferCount(PUC_HANDLE hDevice, UINT32 nCount);
@@ -1205,12 +1270,12 @@ PUCRESULT WINAPI PUC_SetRingBufferCount(PUC_HANDLE hDevice, UINT32 nCount);
 		@note This function is thread-safe.
 		@see PUC_SetXferTimeOut
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“]‘—‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pSingleXferTimeOut ƒVƒ“ƒOƒ‹“]‘—‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)‚ÌŠi”[æ
-		@param[out] pContinuousXferTimeOut ˜A‘±“]‘—‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®è»¢é€æ™‚ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pSingleXferTimeOut ã‚·ãƒ³ã‚°ãƒ«è»¢é€ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)ã®æ ¼ç´å…ˆ
+		@param[out] pContinuousXferTimeOut é€£ç¶šè»¢é€ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetXferTimeOut
 */
 PUCRESULT WINAPI PUC_GetXferTimeOut(PUC_HANDLE hDevice, UINT32* pSingleXferTimeOut, UINT32* pContinuousXferTimeOut);
@@ -1228,36 +1293,54 @@ PUCRESULT WINAPI PUC_GetXferTimeOut(PUC_HANDLE hDevice, UINT32* pSingleXferTimeO
 		@note This function is thread-safe.
 		@see PUC_GetXferTimeOut
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì“]‘—‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B@n
-			PUC_XFER_TIMEOUT_AUTO‚ğw’è‚·‚é‚ÆAB‰e‘¬“x‚É‰‚¶‚Ä©“®‚Åƒ^ƒCƒ€ƒAƒEƒg‚ğ’²®‚µ‚Ü‚·B@n
-			PUC_XFER_TIMEOUT_INFINITE‚ğw’è‚·‚é‚ÆAƒ^ƒCƒ€ƒAƒEƒg‚Í‚È‚­‚È‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nSingleXferTimeOut ƒVƒ“ƒOƒ‹“]‘—‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)
-		@param[in] nContinuousXferTimeOut ˜A‘±“]‘—‚Ìƒ^ƒCƒ€ƒAƒEƒgŠÔ(ms)
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®è»¢é€æ™‚ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚@n
+			PUC_XFER_TIMEOUT_AUTOã‚’æŒ‡å®šã™ã‚‹ã¨ã€æ’®å½±é€Ÿåº¦ã«å¿œã˜ã¦è‡ªå‹•ã§ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã‚’èª¿æ•´ã—ã¾ã™ã€‚@n
+			PUC_XFER_TIMEOUT_INFINITEã‚’æŒ‡å®šã™ã‚‹ã¨ã€ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã¯ãªããªã‚Šã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nSingleXferTimeOut ã‚·ãƒ³ã‚°ãƒ«è»¢é€ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)
+		@param[in] nContinuousXferTimeOut é€£ç¶šè»¢é€ã®ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆæ™‚é–“(ms)
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetXferTimeOut
 */
 PUCRESULT WINAPI PUC_SetXferTimeOut(PUC_HANDLE hDevice, UINT32 nSingleXferTimeOut, UINT32 nContinuousXferTimeOut);
 
 /*!
 	@~english
-		@brief This retrieves the maximum framerate for the device.
+		@brief This retrieves the maximum framerate for the current resolution.
 		@param[in] hDevice The device handle to be controlled
 		@param[out] pFramerate The storage destination for the maximum framerate
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_GetFramerateShutter
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌÅ‘åB‰e‘¬“x‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pFramerate Å‘åB‰e‘¬“x‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ç¾åœ¨ã®è§£åƒåº¦ã«å¯¾ã™ã‚‹æœ€å¤§æ’®å½±é€Ÿåº¦ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pFramerate æœ€å¤§æ’®å½±é€Ÿåº¦ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetFramerateShutter
 */
 PUCRESULT WINAPI PUC_GetMaxFramerate(PUC_HANDLE hDevice, UINT32* pFramerate);
+
+/*!
+	@~english
+		@brief This retrieves the framerate limit information.
+		@param[in] hDevice The device handle to be controlled.
+		@param[out] pLimitInfo Structure for storing framerate limit values.
+		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
+		@note This function is thread-safe.
+		@see PUC_GetFramerateShutter
+	@~japanese
+		@brief é™ç•Œæ’®å½±é€Ÿåº¦æƒ…å ±ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pLimitInfo é™ç•Œæ’®å½±é€Ÿåº¦ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
+		@see PUC_GetFramerateShutter
+*/
+PUCRESULT WINAPI PUC_GetFramerateLimit(PUC_HANDLE hDevice, PPUC_FRAMERATE_LIMIT_INFO pLimitInfo);
 
 /*!
 	@~english
@@ -1271,13 +1354,13 @@ PUCRESULT WINAPI PUC_GetMaxFramerate(PUC_HANDLE hDevice, UINT32* pFramerate);
 		@see PUC_SetFramerateShutter
 		@see PUC_SetExposeTime
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌB‰e‘¬“x‚¨‚æ‚ÑƒVƒƒƒbƒ^[‘¬“x(1/fps)‚ğæ“¾‚µ‚Ü‚·B
-		@details PUC_SetExposeTimeŠÖ”‚É‚æ‚è˜IŒõE”ñ˜IŒõŠúŠÔ‚ğ’¼Úİ’è‚µ‚½ê‡A–{ŠÖ”‚Å•Ô‚³‚ê‚é’l‚Í•s³‚È’l‚É‚È‚è‚Ü‚·‚Ì‚Å‚²’ˆÓ‚­‚¾‚³‚¢B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pFramerate B‰e‘¬“x‚ÌŠi”[æ
-		@param[out] pShutterSpeedFps ƒVƒƒƒbƒ^[‘¬“x(1/fps)‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®æ’®å½±é€Ÿåº¦ãŠã‚ˆã³ã‚·ãƒ£ãƒƒã‚¿ãƒ¼é€Ÿåº¦(1/fps)ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@details PUC_SetExposeTimeé–¢æ•°ã«ã‚ˆã‚Šéœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’ç›´æ¥è¨­å®šã—ãŸå ´åˆã€æœ¬é–¢æ•°ã§è¿”ã•ã‚Œã‚‹å€¤ã¯ä¸æ­£ãªå€¤ã«ãªã‚Šã¾ã™ã®ã§ã”æ³¨æ„ãã ã•ã„ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pFramerate æ’®å½±é€Ÿåº¦ã®æ ¼ç´å…ˆ
+		@param[out] pShutterSpeedFps ã‚·ãƒ£ãƒƒã‚¿ãƒ¼é€Ÿåº¦(1/fps)ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetFramerateShutter
 		@see PUC_SetExposeTime
 */
@@ -1295,13 +1378,13 @@ PUCRESULT WINAPI PUC_GetFramerateShutter(PUC_HANDLE hDevice, UINT32* pFramerate,
 		@see PUC_GetExposeTime
 		@see PUC_SetExposeTime
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌB‰e‘¬“x‚¨‚æ‚ÑƒVƒƒƒbƒ^[‘¬“x(1/fps)‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B@n–{ŠÖ”‚ğÀs‚·‚é‚ÆAPUC_GetExposeTime‚Å•Ô‹p‚³‚ê‚é’l‚à•ÏX‚³‚ê‚Ü‚·B@nƒtƒŒ[ƒ€ƒŒ[ƒg‚ğ•Ï‚¦‚é‚Æ“¯ŠúM†‚Ìo—Í”{—¦‚Íx1”{‚É–ß‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nFramerate B‰e‘¬“x
-		@param[in] nShutterSpeedFps ƒVƒƒƒbƒ^[‘¬“x(1/fps)
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®æ’®å½±é€Ÿåº¦ãŠã‚ˆã³ã‚·ãƒ£ãƒƒã‚¿ãƒ¼é€Ÿåº¦(1/fps)ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚@næœ¬é–¢æ•°ã‚’å®Ÿè¡Œã™ã‚‹ã¨ã€PUC_GetExposeTimeã§è¿”å´ã•ã‚Œã‚‹å€¤ã‚‚å¤‰æ›´ã•ã‚Œã¾ã™ã€‚@nãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã‚’å¤‰ãˆã‚‹ã¨åŒæœŸä¿¡å·ã®å‡ºåŠ›å€ç‡ã¯x1å€ã«æˆ»ã‚Šã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nFramerate æ’®å½±é€Ÿåº¦
+		@param[in] nShutterSpeedFps ã‚·ãƒ£ãƒƒã‚¿ãƒ¼é€Ÿåº¦(1/fps)
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_GetExposeTime
 		@see PUC_SetExposeTime
 */
@@ -1310,71 +1393,113 @@ PUCRESULT WINAPI PUC_SetFramerateShutter(PUC_HANDLE hDevice, UINT32 nFramerate, 
 /*!
 	@~english
 		@brief This retrieves the exposure/non-exposure time of the device.
-		@details The return value of this function will change if the frame rate and shutter speed is changed with PUC_SetFramerateShutter function. @n Changing the exposure/non-exposure time resets the output magnification rate of synchronization signal to x1.
+		@details The return value of this function will change if the frame rate and shutter speed is changed with PUC_SetFramerateShutter function. 
+		@n Changing the exposure/non-exposure time resets the output magnification rate of synchronization signal to x1.
+		@n If it is less than 100nsec, it will be rounded up and an error will occur.
 		@param[in] hDevice The device handle to be controlled
-		@param[out] pExpOnClk The storage destination for the exposure period (clock units)
-		@param[out] pExpOffClk The storage destination for the non-exposure period (clock units)
+		@param[out] pExpOnTime The storage destination for the exposure period (nsec units)
+		@param[out] pExpOffTime The storage destination for the non-exposure period (nsec units)
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_SetExposeTime
 		@see PUC_SetFramerateShutter
 	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì˜IŒõE”ñ˜IŒõŠúŠÔ‚ğæ“¾‚µ‚Ü‚·B
-		@details PUC_SetFramerateShutterŠÖ”‚ÅB‰e‘¬“x‚¨‚æ‚ÑƒVƒƒƒbƒ^[‘¬“x‚ª•ÏX‚³‚ê‚é‚ÆA–{ŠÖ”‚Å•Ô‹p‚³‚ê‚é’l‚à•Ï‚í‚è‚Ü‚·B@n˜IŒõE”ñ˜IŒõŠúŠÔ‚ğ•Ï‚¦‚é‚Æ“¯ŠúM†‚Ìo—Í”{—¦‚Íx1”{‚É–ß‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pExpOnClk ˜IŒõŠúŠÔiƒNƒƒbƒN’PˆÊj‚ÌŠi”[æ
-		@param[out] pExpOffClk ”ñ˜IŒõŠúŠÔiƒNƒƒbƒN’PˆÊj‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®éœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@details PUC_SetFramerateShutteré–¢æ•°ã§æ’®å½±é€Ÿåº¦ãŠã‚ˆã³ã‚·ãƒ£ãƒƒã‚¿ãƒ¼é€Ÿåº¦ãŒå¤‰æ›´ã•ã‚Œã‚‹ã¨ã€æœ¬é–¢æ•°ã§è¿”å´ã•ã‚Œã‚‹å€¤ã‚‚å¤‰ã‚ã‚Šã¾ã™ã€‚
+		@n éœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’å¤‰ãˆã‚‹ã¨åŒæœŸä¿¡å·ã®å‡ºåŠ›å€ç‡ã¯x1å€ã«æˆ»ã‚Šã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pExpOnTime éœ²å…‰æœŸé–“ï¼ˆnsecå˜ä½ï¼‰ã®æ ¼ç´å…ˆ
+		@param[out] pExpOffTime ééœ²å…‰æœŸé–“ï¼ˆnsecå˜ä½ï¼‰ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetExposeTime
 		@see PUC_SetFramerateShutter
 */
-PUCRESULT WINAPI PUC_GetExposeTime(PUC_HANDLE hDevice, UINT32* pExpOnClk, UINT32* pExpOffClk);
-
-/*!
-	@~english
-		@brief This sets the exposure/non-exposure time of the device.
-		@details Opening the device will reset this setting. @n Note that the return value of PUC_GetFramerateShutter function will be invalid if the exposure/non-exposure time is set directly with this function.
-		@param[in] hDevice The device handle to be controlled
-		@param[in] nExpOnClk The exposure period (clock units)
-		@param[in] nExpOffClk The non-exposure period (clock units)
-		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
-		@note This function is thread-safe.
-		@see PUC_GetExposeTime
-		@see PUC_GetFramerateShutter
-	@~japanese
-		@brief ƒfƒoƒCƒX‚Ì˜IŒõE”ñ˜IŒõŠúŠÔ‚ğİ’è‚µ‚Ü‚·B
-		@details ƒfƒoƒCƒX‚ÌƒI[ƒvƒ“‚Éİ’è‚ÍƒŠƒZƒbƒg‚³‚ê‚Ü‚·B@n–{ŠÖ”‚É‚æ‚è˜IŒõE”ñ˜IŒõŠúŠÔ‚ğ’¼Úİ’è‚µ‚½ê‡APUC_GetFramerateShutterŠÖ”‚Å•Ô‚³‚ê‚é’l‚Í•s³‚È’l‚É‚È‚è‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[in] nExpOnClk ˜IŒõŠúŠÔiƒNƒƒbƒN’PˆÊj
-		@param[in] nExpOffClk ”ñ˜IŒõŠúŠÔiƒNƒƒbƒN’PˆÊj
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
-		@see PUC_GetExposeTime
-		@see PUC_GetFramerateShutter
-*/
-PUCRESULT WINAPI PUC_SetExposeTime(PUC_HANDLE hDevice, UINT32 nExpOnClk, UINT32 nExpOffClk);
+PUCRESULT WINAPI PUC_GetExposeTime(PUC_HANDLE hDevice, UINT32* pExpOnTime, UINT32* pExpOffTime);
 
 /*!
 	@~english
 		@brief This retrieves the minimum exposure/non-exposure time of the device.
+		@n If it is less than 100nsec, it will be rounded up and an error will occur.
 		@param[in] hDevice The device handle to be controlled
-		@param[out] pMinExpOnClk The storage destination for the minimum exposure period (clock units)
-		@param[out] pMinExpOffClk The storage destination for the minimum non-exposure period (clock units)
+		@param[out] pMinExpOnTime The storage destination for the minimum exposure period (nsec units)
+		@param[out] pMinExpOffTime The storage destination for the minimum non-exposure period (nsec units)
 		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
 		@note This function is thread-safe.
 		@see PUC_SetExposeTime
 	@~japanese
-		@brief ƒfƒoƒCƒX‚ÌÅ¬˜IŒõE”ñ˜IŒõŠúŠÔ‚ğæ“¾‚µ‚Ü‚·B
-		@param[in] hDevice ‘€ì‘ÎÛ‚ÌƒfƒoƒCƒXƒnƒ“ƒhƒ‹
-		@param[out] pMinExpOnClk Å¬˜IŒõŠúŠÔiƒNƒƒbƒN’PˆÊj‚ÌŠi”[æ
-		@param[out] pMinExpOffClk Å¬”ñ˜IŒõŠúŠÔiƒNƒƒbƒN’PˆÊj‚ÌŠi”[æ
-		@return ¬Œ÷‚ÍPUC_SUCCEEDEDA¸”s‚Í‚»‚êˆÈŠO‚ª•Ô‚è‚Ü‚·B
-		@note –{ŠÖ”‚ÍƒXƒŒƒbƒhƒZ[ƒt‚Å‚·B
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®æœ€å°éœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’å–å¾—ã—ã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[out] pMinExpOnTime æœ€å°éœ²å…‰æœŸé–“ï¼ˆnsecå˜ä½ï¼‰ã®æ ¼ç´å…ˆ
+		@param[out] pMinExpOffTime æœ€å°ééœ²å…‰æœŸé–“ï¼ˆnsecå˜ä½ï¼‰ã®æ ¼ç´å…ˆ
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
 		@see PUC_SetExposeTime
 */
-PUCRESULT WINAPI PUC_GetMinExposeTime(PUC_HANDLE hDevice, UINT32* pMinExpOnClk, UINT32* pMinExpOffClk);
+PUCRESULT WINAPI PUC_GetMinExposeTime(PUC_HANDLE hDevice, UINT32* pMinExpOnTime, UINT32* pMinExpOffTime);
 
+/*!
+	@~english
+		@brief This sets the exposure/non-exposure time of the device.
+		@details Opening the device will reset this setting. 
+		@n Note that the return value of PUC_GetFramerateShutter function will be invalid if the exposure/non-exposure time is set directly with this function.
+		@n If it is less than 100nsec, it will be rounded up and an error will occur.
+		@param[in] hDevice The device handle to be controlled
+		@param[in] nExpOnTime The exposure period (nsec units)
+		@param[in] nExpOffTime The non-exposure period (nsec units)
+		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
+		@note This function is thread-safe.
+		@see PUC_GetExposeTime
+		@see PUC_GetFramerateShutter
+	@~japanese
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã®éœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’è¨­å®šã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã®ã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«è¨­å®šã¯ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¾ã™ã€‚
+		@n æœ¬é–¢æ•°ã«ã‚ˆã‚Šéœ²å…‰ãƒ»ééœ²å…‰æœŸé–“ã‚’ç›´æ¥è¨­å®šã—ãŸå ´åˆã€PUC_GetFramerateShutteré–¢æ•°ã§è¿”ã•ã‚Œã‚‹å€¤ã¯ä¸æ­£ãªå€¤ã«ãªã‚Šã¾ã™ã€‚
+		@n 100nsecæœªæº€ã¯åˆ‡ã‚Šä¸Šã’ã‚‹ãŸã‚èª¤å·®ãŒç™ºç”Ÿã—ã¾ã™ã€‚
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@param[in] nExpOnTime éœ²å…‰æœŸé–“ï¼ˆnsecå˜ä½ï¼‰
+		@param[in] nExpOffTime ééœ²å…‰æœŸé–“ï¼ˆnsecå˜ä½ï¼‰
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
+		@see PUC_GetExposeTime
+		@see PUC_GetFramerateShutter
+*/
+PUCRESULT WINAPI PUC_SetExposeTime(PUC_HANDLE hDevice, UINT32 nExpOnTime, UINT32 nExpOffTime);
+
+/*!
+	@~english
+		@brief This resets the device.
+		@details There is possibility for PUC_OpenDevice to return error even though device is detected. Please set this to resets device.
+		@param[in] nDeviceNo Specify the retrieved device ID here.
+		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
+		@note This function is thread-safe.
+		@see PUC_ResetDevice
+	@~japanese
+		@brief ãƒ‡ãƒã‚¤ã‚¹ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã™ã€‚
+		@details ãƒ‡ãƒã‚¤ã‚¹ã‚’èªè­˜ã—PUC_OpenDeviceã«å¤±æ•—ã™ã‚‹å ´åˆã€ã“ã®é–¢æ•°ã§ãƒ‡ãƒã‚¤ã‚¹ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¦ä¸‹ã•ã„
+		@param[in] nDeviceNo æ¤œç´¢ã—ãŸãƒ‡ãƒã‚¤ã‚¹ç•ªå·ã‚’æŒ‡å®šã—ã¾ã™ã€‚
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
+		@see PUC_ResetDevice
+*/
+PUCRESULT WINAPI PUC_ResetDevice(UINT32 nDeviceNo);
+
+
+/*!
+	@~english
+		@brief This resets the sequence number.
+		@param[in] hDevice The device handle to be controlled
+		@return If successful, PUC_SUCCEEDED will be returned. If failed, other responses will be returned.
+		@note This function is thread-safe.
+	@~japanese
+		@brief ã‚·ãƒ¼ã‚±ãƒ³ã‚¹ç•ªå·ã‚’ãƒªã‚»ãƒƒãƒˆã—ã¾ã™
+		@param[in] hDevice æ“ä½œå¯¾è±¡ã®ãƒ‡ãƒã‚¤ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+		@return æˆåŠŸæ™‚ã¯PUC_SUCCEEDEDã€å¤±æ•—æ™‚ã¯ãã‚Œä»¥å¤–ãŒè¿”ã‚Šã¾ã™ã€‚
+		@note æœ¬é–¢æ•°ã¯ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ã™ã€‚
+*/
+PUCRESULT WINAPI PUC_ResetSequenceNo(PUC_HANDLE hDevice);
 
 #ifdef __cplusplus
 }

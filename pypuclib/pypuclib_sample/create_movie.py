@@ -31,7 +31,8 @@ video = cv2.VideoWriter(path, codec, fps, (width, height), False)
 # global variable
 b_show = False      # UI flag
 g_count = 0         # counter of save frames
-
+g_oldSeqNo = 0 
+g_currentSeqNo = 0
 
 # Explanation
 print("press Esc to quit this application ")
@@ -50,17 +51,26 @@ while(1):
 def callback(data):
     global g_count
     global b_show
+    global g_oldSeqNo
+    global g_currentSeqNo
 
     # finish save AVI file
     if g_count == SAVE_FRAME_COUNT:
         video.release()
+        xferData = cam.grab()
         g_count = 0
         b_show = True
         
     if video.isOpened() == True:
         src = decoder.decode(data,0,0,512,512) # decode range (x,y,w,h) = (0,0,512,512)
-        video.write(src)
-        g_count += 1
+        g_currentSeqNo = data.sequenceNo()
+
+        if g_currentSeqNo != g_oldSeqNo:
+            video.write(src)
+            g_count += 1
+            g_oldSeqNo = g_currentSeqNo
+        
+       
      
 
  # begin transfer

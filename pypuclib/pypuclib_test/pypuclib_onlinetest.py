@@ -2,9 +2,11 @@ import unittest, sys, time
 import numpy as np
 
 import pypuclib
-from pypuclib import CameraFactory, Camera, XferData, Resolution, Decoder
+from pypuclib import CameraFactory, Camera, XferData, Resolution, Decoder, FramerateLimit
 from pypuclib import PUCException, WrapperException
 from pypuclib import PUC_DATA_MODE, PUC_COLOR_TYPE
+
+import time
 
 # need to connect camera and run test
 class pypuclib_onlinetest(unittest.TestCase):
@@ -161,6 +163,59 @@ class pypuclib_onlinetest(unittest.TestCase):
                                         xferdata.resolution().width,
                                         xferdata.resolution().height)
         self.assertEqual(seq, xferdata.sequenceNo())
+
+    def test_framerateLimit(self):
+        limit = self.cam.framerateLimit()
+
+        # over max framerate
+        with self.assertRaises(PUCException):
+            self.cam.setFramerate(limit.limitMax + 1)
+
+        # less than min framerate
+        with self.assertRaises(PUCException):
+            self.cam.setFramerate(limit.limitMin - 1)
+
+    def test_resetDevice(self):
+        self.cam.beginXfer(self.callback)
+        self.cam.endXfer()
+        self.cam.resetDevice()
+        self.cam.beginXfer(self.callback)
+
+        self.assertTrue(self.cam.isXferring())
+        time.sleep(1)
+        self.assertTrue(self.isCallbacked)
+
+    def test_resetSequenceNo(self):
+        decoder = self.cam.decoder()
+
+        while(1):
+            xferData1 = self.cam.grab()
+
+            seq = decoder.extractSequenceNo(xferData1.data(),
+                                            xferData1.resolution().width,
+                                            xferData1.resolution().height)
+            if(seq < 1000) or (seq > 64535):
+                time.sleep(2)
+  
+            else:
+                break
+
+        self.cam.resetSequenceNo()
+
+        xferData2 = self.cam.grab()
+
+        seq_reset = decoder.extractSequenceNo(xferData2.data(),
+                                        xferData2.resolution().width,
+                                        xferData2.resolution().height)
+
+        self.assertTrue(seq_reset <= seq)
+
+
+
+        
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

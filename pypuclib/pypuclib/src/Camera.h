@@ -337,6 +337,29 @@ public:
 	"\"\"                                              \n");
 	std::unique_ptr<XferData> grab();
 
+
+	PY_DOC(DOC_RESETDEVICE,
+		"\"\"Reset the device.						   \n"
+		"\"\"                                          \n");
+	void resetDevice();
+
+	PY_DOC(DOC_RESETSEQUENCENO,
+		"\"\"Reset the sequence number.				   \n"
+		"\"\"                                          \n");
+	void resetSequenceNo();
+
+	PY_DOC(DOC_FRAMERATE_LIMIT,
+		"\"\"Get framerate limit info of the device.    \n"
+		"                                               \n"
+		"Get framerate limit info as FramerateLimit obj.\n"
+		"                                               \n"
+		"Returns                                        \n"
+		"-------                                        \n"
+		"FrameRateLimit obj                             \n"
+		"    Limit info of framerate.                   \n"
+		"\"\"                                           \n");
+	FramerateLimit framerateLimit() const;
+
 private:
 	int deviceNo() const { return m_deviceNo; }
 	unsigned int xferDataSize() const;

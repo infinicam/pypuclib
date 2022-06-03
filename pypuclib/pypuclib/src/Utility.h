@@ -51,6 +51,8 @@ public:
 public:
 	Limit(const int& minimum, const int& maximum, const int& steps) 
 	: min(minimum), max(maximum), step(steps){}
+	Limit(const int& minimum, const int& maximum)
+		: min(minimum), max(maximum) {}
 	~Limit() {}
 
 	int min;
@@ -78,4 +80,29 @@ public:
 	~ResolutionLimit() {}
 	Limit limitW;
 	Limit limitH;
+};
+
+class FramerateLimit
+{
+public:
+	PY_DOC(DOC_CLASS_FRAMERATE_LIMIT,
+		"\"\"                                              \n"
+		"                                                  \n"
+		"Limit information for framerate.                  \n"
+		"                                                  \n"
+		"Attributes                                        \n"
+		"----------                                        \n"
+		"min : minimum value                               \n"
+		"    Minimum framerate.							   \n"
+		"max : max value                                   \n"
+		"    Max framerate.								   \n"
+		"\"\"                                              \n");
+
+public:
+	FramerateLimit() : min(0), max(0) {}
+	FramerateLimit(const int& min, const int& max) :  min(min), max(max) {}
+	~FramerateLimit() {}
+
+	int min;
+	int max;
 };

@@ -56,8 +56,11 @@ PYBIND11_MODULE(pypuclib, m) {
         .def("endXfer", &Camera::endXfer, Camera::DOC_END_XFER)
         .def("isXferring", &Camera::isXferring, Camera::DOC_IS_XFERRING)
         .def("decoder", &Camera::decoder, Camera::DOC_DECODER)
-        .def("grab", &Camera::grab, Camera::DOC_GRAB);
-        
+        .def("grab", &Camera::grab, Camera::DOC_GRAB)
+        .def("resetDevice", &Camera::resetDevice, Camera::DOC_RESETDEVICE)
+        .def("resetSequenceNo", &Camera::resetSequenceNo, Camera::DOC_RESETSEQUENCENO)
+        .def("framerateLimit", &Camera::framerateLimit, Camera::DOC_FRAMERATE_LIMIT);
+
     py::class_<Resolution>(m, "Resolution", Resolution::DOC_CLASS_RESOLUTION)
         .def(py::init<>())
         .def(py::init<const int&, const int&>())
@@ -82,6 +85,10 @@ PYBIND11_MODULE(pypuclib, m) {
         .def_readonly("limitW", &ResolutionLimit::limitW)
         .def_readonly("limitH", &ResolutionLimit::limitH);
 
+    py::class_<FramerateLimit>(m, "FramerateLimit", FramerateLimit::DOC_CLASS_FRAMERATE_LIMIT)
+        .def_readonly("limitMin", &FramerateLimit::min)
+        .def_readonly("limitMax", &FramerateLimit::max);
+
     py::class_<XferData>(m, "XferData")
         .def("dataSize", &XferData::dataSize, XferData::DOC_DATASIZE)
         .def("sequenceNo", &XferData::sequenceNo, XferData::DOC_SEQUENCENO)
@@ -99,7 +106,9 @@ PYBIND11_MODULE(pypuclib, m) {
         .def("decode", py::overload_cast<py::array_t<uint8_t>&, int, int, int, int>(&Decoder::decode), Decoder::DOC_DECODE_D)
         .def("numDecodeThread", &Decoder::numDecodeThread, Decoder::DOC_NUM_DECODE_THREAD)
         .def("setNumDecodeThread", &Decoder::setNumDecodeThread, Decoder::DOC_SET_NUM_DECODE_THREAD)
-        .def("extractSequenceNo", &Decoder::extractSequenceNo, Decoder::DOC_EXTRACT_SEQUENCENO);
+        .def("extractSequenceNo", &Decoder::extractSequenceNo, Decoder::DOC_EXTRACT_SEQUENCENO)
+        .def("decodeDC", py::overload_cast<py::array_t<uint8_t>&, int, int, int, int>(&Decoder::decodeDC), Decoder::DOC_DECODE_DC_A)
+        .def("decodeDC", py::overload_cast<XferData*, int, int, int, int>(&Decoder::decodeDC), Decoder::DOC_DECODE_DC_B);
 
     py::enum_<PUC_COLOR_TYPE>(m, "PUC_COLOR_TYPE")
         .value("PUC_COLOR_MONO", PUC_COLOR_MONO)

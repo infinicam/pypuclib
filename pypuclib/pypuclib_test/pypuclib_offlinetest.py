@@ -1,4 +1,5 @@
 import unittest
+import os
 import json
 from PIL import Image
 import numpy as np
@@ -38,7 +39,7 @@ class pypuclib_offlinetest(unittest.TestCase):
         self.assertNotEqual(dec.quantization(), q) # should be clamped ushort
 
     def prepare_data(self):
-        self.dataname="data_w1246h1008_seq4658"
+        self.dataname = os.path.dirname(os.path.abspath(__file__)) + "\\data_w1246h1008_seq4658"
         self.dict = self.readJson(self.dataname+".json")
         self.decoder = Decoder(self.dict["quantization"])
         self.width = self.dict["width"]
@@ -46,6 +47,15 @@ class pypuclib_offlinetest(unittest.TestCase):
         self.answerSeq=4658
         self.answerImg=np.load(self.dataname+"_answer"+".npy")
         self.compressedData=np.load(self.dataname+".npy")
+
+    def prepare_DCdata(self):
+        self.DCdataname = os.path.dirname(os.path.abspath(__file__)) + "\\DCImage"
+        self.DCdict = self.readJson(self.DCdataname+".json")
+        self.decoder = Decoder(self.DCdict["quantization"])
+        self.DCwidth = self.DCdict["width"]
+        self.DCheight = self.DCdict["height"]
+        self.DCanswerImg=np.load(self.DCdataname+"_answer"+".npy")
+        self.DCcompressedData=np.load(self.DCdataname+".npy")
 
     def test_extractSequenceNo(self):
         self.prepare_data()
@@ -112,6 +122,54 @@ class pypuclib_offlinetest(unittest.TestCase):
         self.decoder.setQuantization(list(range(64)))
         img = self.decoder.decode(self.compressedData, Resolution(self.width-8, self.height-8))
         self.assertFalse(np.array_equal(img, self.answerImg))
+
+    def test_decodeDC(self):
+        self.prepare_DCdata()
+
+        decoder = self.decoder
+        xferdata = self.DCcompressedData
+
+        nWidth = self.DCwidth
+        nHeight = self.DCheight
+
+        nLineBytes = 0
+        nBlockCountX = 0
+        nBlockCountY = 0
+
+        if nWidth % 4 == 0:
+            nLineBytes = nWidth
+        else:
+            nLineBytes = nWidth + (4 - nWidth % 4)
+
+        if nLineBytes % 8 == 0:
+            nBlockCountX = nLineBytes / 8
+        else:
+            nBlockCountX = (nLineBytes + 7) / 8
+
+        if nHeight % 8 == 0:
+            nBlockCountY = nHeight / 8
+        else:
+            nBlockCountY = (nHeight + 7) / 8
+
+
+        # range violation
+        with self.assertRaises(PUCException):
+            decoder.decodeDC(xferdata, 0, 0, 0, int(nBlockCountY))
+
+        with self.assertRaises(PUCException):
+            decoder.decodeDC(xferdata, 0, 0, int(nBlockCountX), 0)
+
+        with self.assertRaises(PUCException):
+            decoder.decodeDC(xferdata, 0, 0, int(nBlockCountX), int(nBlockCountY) + 5)
+
+        with self.assertRaises(PUCException):
+            decoder.decodeDC(xferdata, 0, 0, int(nBlockCountX) + 5, int(nBlockCountY))
+
+        decode_img = decoder.decode(xferdata, Resolution(nWidth, nHeight))
+        DCdecode_img = decoder.decodeDC(xferdata, 0, 0, 156, 126)
+
+        self.assertFalse(np.array_equal(decode_img, DCdecode_img))
+        self.assertTrue(np.array_equal(self.DCanswerImg, DCdecode_img))
 
 if __name__ == '__main__':
     unittest.main()

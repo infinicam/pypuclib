@@ -290,6 +290,7 @@ class Application(tk.Frame):
         self.savefile_csv.pack(side=tk.LEFT, padx = 5)
         self.savefile_bin.pack(side=tk.LEFT, padx = 5)
 
+
         #---------------------------------------------------
         # record button
         #---------------------------------------------------
@@ -309,6 +310,30 @@ class Application(tk.Frame):
                                            variable=self.uistopVal,
                                            command=self.uistop)
         self.uistopCheck.pack(side=tk.RIGHT,anchor="center", expand=True)
+
+        self.resetSeqButton = ttk.Button(self.recPanel,
+                                         text = "Reset Seq No",
+                                         command = self.resetSequenceNo,
+                                         width = 30)
+        self.resetSeqButton.pack(side=tk.RIGHT, anchor = "center", expand = True)
+
+
+        #---------------------------------------------------
+        # reset button
+        #---------------------------------------------------
+        self.resetPanel = ttk.Frame(self.optionFrame,
+                                  width=frameWidth,
+                                  height=30,
+                                  relief=tk.FLAT)
+        self.resetPanel.propagate(False)
+        self.resetPanel.pack(side=tk.BOTTOM, fill=tk.Y, padx=5, pady=5)
+        self.resetButton = ttk.Button(self.resetPanel, 
+                                    text = "RESET", 
+                                    command=self.resetDevice,
+                                    width=15)
+        self.resetButton.pack(side=tk.RIGHT,anchor="sw", expand=True)
+
+
 
         #---------------------------------------------------
         # canvas
@@ -428,6 +453,18 @@ class Application(tk.Frame):
         self.cam.close()
         if self.fcreator is not None:
             self.fcreator.close()
+
+    def resetSequenceNo(self):
+        self.cam.resetSequenceNo()
+
+    def resetDevice(self):
+        self.locker.acquire()
+        self.cam.resetDevice()
+        self.cam = CameraFactory().create()
+        self.framerateList.set(self.cam.framerate())
+        self.updateResolutionList()
+        self.updateShutterList()
+        self.locker.release()
 
 
 class FileApplication(tk.Frame):

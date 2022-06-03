@@ -6,7 +6,8 @@
     <ProjectHome>
     </ProjectHome>
     <StartupFile>hello_world.py</StartupFile>
-    <SearchPath>..\x64\Debug</SearchPath>
+    <SearchPath>
+    </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>pypuclib_sample</Name>
@@ -32,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="create_movie.py" />
+    <Compile Include="find1000\find1000.py" />
     <Compile Include="gui_sample.py">
       <SubType>Code</SubType>
     </Compile>
@@ -42,6 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="find1000\" />
+    <Folder Include="find1000\image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="find1000\coco.names" />
+    <Content Include="find1000\image\dnnoutput.png" />
+    <Content Include="find1000\image\find1000_01.PNG" />
+    <Content Include="find1000\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
