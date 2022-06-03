@@ -1,6 +1,6 @@
 # find1000
 
-![app](image/find1000_01.png)
+![app](image/find1000_01.PNG)
 <hr>
 
 "find1000" is a python / Windows sample application for the USB high-speed streaming camera [INFINICAM UC-1](https://www.photron.co.jp/products/hsvcam/infinicam/) and its SDK with OpenCV.
