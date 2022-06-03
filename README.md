@@ -5,6 +5,8 @@ This package allows user to control  [INFINICAM UC-1](https://www.photron.co.jp/
 
 https://user-images.githubusercontent.com/71418024/171789047-f61ddb07-27a4-4213-bff1-26cc0676d0b6.mp4
 
+*This is [tracking_sample](pypuclib/pypuclib_sample/tracking_sample.py) demo movie.
+
 ## How to Use
 
 1. Install INFINICAM SDK [PUCLIB](https://www.photron.co.jp/products/hsvcam/infinicam/tech.html), driver, and Visual C++ Redistributable 2019.
