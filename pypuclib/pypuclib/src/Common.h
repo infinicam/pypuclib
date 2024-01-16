@@ -4,7 +4,9 @@
 #include "windows.h"
 
 #include "../include/PUCLIB.h"
-#pragma comment(lib, "./lib/PUCLIB.lib")
+#include "../include/PUCUTIL.h"
+#pragma comment(lib, "lib/PUCLIB.lib")
+#pragma comment(lib, "lib/PUCUTIL.lib")
 
 #include <iostream>
 #include <vector>

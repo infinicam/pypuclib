@@ -6,7 +6,7 @@ from pybind11 import get_cmake_dir
 
 import os, sys
 
-__version__ = "0.0.2"
+__version__ = "1.0.3"
 
 ext_modules = [
     Pybind11Extension(
@@ -26,6 +26,7 @@ setup(
     ext_modules=ext_modules,
     cmdclass={"build_ext": build_ext},
     data_files=[("lib/site-packages", ["dll/PUCLIB.dll"]),
-                ("lib/site-packages", ["dll/ICYUSB.dll"])],
+                ("lib/site-packages", ["dll/ICYUSB.dll"]),
+                ("lib/site-packages", ["dll/PUCUTIL.dll"])],
     zip_safe=False,
 )

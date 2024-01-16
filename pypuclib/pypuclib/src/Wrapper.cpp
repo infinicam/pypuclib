@@ -46,8 +46,6 @@ PYBIND11_MODULE(pypuclib, m) {
         .def("setShutter", &Camera::setShutter, Camera::DOC_SET_SHUTTER)
         .def("setFramerateShutter", &Camera::setFramerateShutter, Camera::DOC_SET_FRAMERATE_SHUTTER)
         .def("colortype", &Camera::colortype, Camera::DOC_COLORTYPE)
-        .def("datamode", &Camera::datamode, Camera::DOC_DATAMODE)
-        .def("setDatamode", &Camera::setDatamode, Camera::DOC_SET_DATAMODE)
         .def("ringBufferCount", &Camera::ringBufferCount, Camera::DOC_RINGBUFFER_COUNT)
         .def("setRingBufferCount", &Camera::setRingBufferCount, Camera::DOC_SET_RINGBUFEFR_COUNT)
         .def("xferTimeout", &Camera::xferTimeout, Camera::DOC_XFER_TIMEOUT)
@@ -59,7 +57,10 @@ PYBIND11_MODULE(pypuclib, m) {
         .def("grab", &Camera::grab, Camera::DOC_GRAB)
         .def("resetDevice", &Camera::resetDevice, Camera::DOC_RESETDEVICE)
         .def("resetSequenceNo", &Camera::resetSequenceNo, Camera::DOC_RESETSEQUENCENO)
-        .def("framerateLimit", &Camera::framerateLimit, Camera::DOC_FRAMERATE_LIMIT);
+        .def("framerateLimit", &Camera::framerateLimit, Camera::DOC_FRAMERATE_LIMIT)
+        .def("fanState", &Camera::fanState, Camera::DOC_FAN_STATE)
+        .def("setFanState", &Camera::setFanState, Camera::DOC_SET_FAN_STATE)
+        .def("sensorTemperature", &Camera::sensorTemperature, Camera::DOC_SENSOR_TEMPERATURE);
 
     py::class_<Resolution>(m, "Resolution", Resolution::DOC_CLASS_RESOLUTION)
         .def(py::init<>())
@@ -89,11 +90,17 @@ PYBIND11_MODULE(pypuclib, m) {
         .def_readonly("limitMin", &FramerateLimit::min)
         .def_readonly("limitMax", &FramerateLimit::max);
 
+    py::class_<GPUSetup>(m, "GPUSetup", GPUSetup::DOC_CLASS_GPU_SETUP)
+        .def(py::init<>())
+        .def(py::init<const int&, const int&>())
+        .def_readwrite("width", &GPUSetup::width)
+        .def_readwrite("height", &GPUSetup::height);
+
     py::class_<XferData>(m, "XferData")
         .def("dataSize", &XferData::dataSize, XferData::DOC_DATASIZE)
         .def("sequenceNo", &XferData::sequenceNo, XferData::DOC_SEQUENCENO)
         .def("data", &XferData::data, XferData::DOC_DATA)
-        .def("resolution", &XferData::resolution), XferData::DOC_RESOLUTION;
+        .def("resolution", &XferData::resolution, XferData::DOC_RESOLUTION);
 
     py::class_<Decoder>(m, "Decoder")
         .def(py::init<>())
@@ -108,17 +115,20 @@ PYBIND11_MODULE(pypuclib, m) {
         .def("setNumDecodeThread", &Decoder::setNumDecodeThread, Decoder::DOC_SET_NUM_DECODE_THREAD)
         .def("extractSequenceNo", &Decoder::extractSequenceNo, Decoder::DOC_EXTRACT_SEQUENCENO)
         .def("decodeDC", py::overload_cast<py::array_t<uint8_t>&, int, int, int, int>(&Decoder::decodeDC), Decoder::DOC_DECODE_DC_A)
-        .def("decodeDC", py::overload_cast<XferData*, int, int, int, int>(&Decoder::decodeDC), Decoder::DOC_DECODE_DC_B);
+        .def("decodeDC", py::overload_cast<XferData*, int, int, int, int>(&Decoder::decodeDC), Decoder::DOC_DECODE_DC_B)
+        .def("decodeGPU", py::overload_cast<py::array_t<uint8_t>&, bool, int>(&Decoder::decodeGPU), Decoder::DOC_DECODE_GPU_A)
+        .def("decodeGPU", py::overload_cast<XferData*, bool, int>(&Decoder::decodeGPU), Decoder::DOC_DECODE_GPU_B)
+        .def("getAvailableGPUProcess", &Decoder::getAvailableGPUProcess, Decoder::DOC_GET_AVAILABLE_GPU_PROCESS)
+        .def("setupGPUDecode", &Decoder::setupGPUDecode, Decoder::DOC_SETUP_GPU_DECODE)
+        .def("teardownGPUDecode", &Decoder::teardownGPUDecode, Decoder::DOC_TEARDOWN_GPU_DECODE)
+        .def("isSetupGPUDecode", &Decoder::isSetupGPUDecode, Decoder::DOC_ISSETUP_GPU_DECODE)
+        .def("getGPULastError", &Decoder::getGPULastError, Decoder::DOC_GET_GPU_LAST_ERROR);
 
     py::enum_<PUC_COLOR_TYPE>(m, "PUC_COLOR_TYPE")
         .value("PUC_COLOR_MONO", PUC_COLOR_MONO)
         .value("PUC_COLOR_COLOR", PUC_COLOR_COLOR)
         .export_values();
 
-    py::enum_<PUC_DATA_MODE>(m, "PUC_DATA_MODE")
-        .value("PUC_DATA_COMPRESSED", PUC_DATA_COMPRESSED)
-        .value("PUC_DATA_DECOMPRESSED_GRAY", PUC_DATA_DECOMPRESSED_GRAY)
-        .export_values();
 
     static py::exception<PUCException> puc_exc(m, "PUCException", PyExc_RuntimeError);
     static py::exception<WrapperException> wrapper_exc(m, "WrapperException", PyExc_RuntimeError);

@@ -6,7 +6,7 @@ from multiprocessing import Process, Manager, Array, Value
 from multiprocessing import shared_memory
 
 import pypuclib
-from pypuclib import CameraFactory, Camera, XferData, PUC_DATA_MODE, Resolution, Decoder
+from pypuclib import CameraFactory, Camera, XferData, Resolution, Decoder
 
 def trim(array, roi):
     return array[roi[1]:roi[1] + roi[3], roi[0]:roi[0] + roi[2]]
@@ -56,8 +56,16 @@ class Application():
         self.shared_arr = np.ndarray(shape=self.shm.size, dtype="uint8", buffer=self.shm.buf)
 
         # template
-        self.tempROI = list(cv2.selectROI("select", frame, False))
+        while True:
+            # tempROI is tuple : (x, y, width, height)
+            tempROI = cv2.selectROI("select", frame, False)
+
+            # ROI's width and height is not 0
+            if tempROI[2] != 0 and tempROI[3] != 0:
+                break
+
         cv2.destroyWindow("select")
+        self.tempROI = list(tempROI)
         self.template = trim(frame, self.tempROI)
 
         # decoding roi(twice of template)

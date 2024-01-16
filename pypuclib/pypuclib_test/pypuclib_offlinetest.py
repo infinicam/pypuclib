@@ -7,6 +7,7 @@ import numpy as np
 import pypuclib
 from pypuclib import Resolution, Decoder
 from pypuclib import PUCException, WrapperException
+from pypuclib import GPUSetup
 
 class pypuclib_offlinetest(unittest.TestCase):
     def readJson(self, name):
@@ -57,7 +58,17 @@ class pypuclib_offlinetest(unittest.TestCase):
         self.DCanswerImg=np.load(self.DCdataname+"_answer"+".npy")
         self.DCcompressedData=np.load(self.DCdataname+".npy")
 
+    def prepare_GPUDecodeData(self):
+        self.GPUDecode_name = os.path.dirname(os.path.abspath(__file__)) + "\\testImage_GPUDecode"
+        self.GPUDecode_dict = self.readJson(self.GPUDecode_name+".json")
+        self.decoder = Decoder(self.GPUDecode_dict["quantization"])
+        self.GPUDecode_width = self.GPUDecode_dict["width"]
+        self.GPUDecode_height = self.GPUDecode_dict["height"]
+        self.GPUDecode_answerImg=np.load(self.GPUDecode_name+"_answer"+".npy")
+        self.GPUDecode_compressedData=np.load(self.GPUDecode_name+".npy")
+
     def test_extractSequenceNo(self):
+        print("test_extractSequenceNo")
         self.prepare_data()
 
         # correct
@@ -69,6 +80,7 @@ class pypuclib_offlinetest(unittest.TestCase):
         self.assertNotEqual(seq, self.answerSeq)
 
     def test_numDecodeThread(self):
+        print("test_numDecodeThread")
         self.prepare_data()
 
         self.decoder.setNumDecodeThread(1)
@@ -82,6 +94,7 @@ class pypuclib_offlinetest(unittest.TestCase):
             array = self.decoder.decode(self.compressedData, Resolution(self.width, self.height))
 
     def test_decodeImage(self):
+        print("test_decodeImage")
         self.prepare_data()
 
         for i in range(1,33):
@@ -122,8 +135,9 @@ class pypuclib_offlinetest(unittest.TestCase):
         self.decoder.setQuantization(list(range(64)))
         img = self.decoder.decode(self.compressedData, Resolution(self.width-8, self.height-8))
         self.assertFalse(np.array_equal(img, self.answerImg))
-
+        
     def test_decodeDC(self):
+        print("test_decodeDC")
         self.prepare_DCdata()
 
         decoder = self.decoder
@@ -170,6 +184,59 @@ class pypuclib_offlinetest(unittest.TestCase):
 
         self.assertFalse(np.array_equal(decode_img, DCdecode_img))
         self.assertTrue(np.array_equal(self.DCanswerImg, DCdecode_img))
+
+
+    # tests for GPUDecode success only for can use GPU device
+    def test_setupGPUDecode(self):
+        print("test_setupGPUDecode")
+        self.prepare_GPUDecodeData()
+
+        decoder = self.decoder
+        nWidth = self.GPUDecode_width
+        nHeight = self.GPUDecode_height
+
+        # range violation
+        with self.assertRaises(PUCException):
+            param = GPUSetup(0, nHeight)
+            decoder.setupGPUDecode(param)
+
+        with self.assertRaises(PUCException):
+            param = GPUSetup(nWidth + 1, nHeight)
+            decoder.setupGPUDecode(param)
+
+        with self.assertRaises(PUCException):
+            param = GPUSetup(nWidth, 0)
+            decoder.setupGPUDecode(param)
+
+        with self.assertRaises(PUCException):
+            param = GPUSetup(nWidth, 1024 + 1)
+            decoder.setupGPUDecode(param)
+
+        param = GPUSetup(nWidth, nHeight)
+        decoder.setupGPUDecode(param)
+        decoder.teardownGPUDecode()
+
+
+    def test_GPUDecode(self):
+        print("test_GPUDecode")
+        self.prepare_GPUDecodeData()
+
+        decoder = self.decoder
+        xferdata = self.GPUDecode_compressedData
+
+        nWidth = self.GPUDecode_width
+        nHeight = self.GPUDecode_height
+
+        param = GPUSetup(nWidth, nHeight)
+        decoder.setupGPUDecode(param)
+
+        GPUDecode_img = decoder.decodeGPU(xferdata, True, nWidth)
+        self.assertTrue(np.array_equal(self.GPUDecode_answerImg, GPUDecode_img))
+
+        decoder.teardownGPUDecode()
+        
+
+
 
 if __name__ == '__main__':
     unittest.main()

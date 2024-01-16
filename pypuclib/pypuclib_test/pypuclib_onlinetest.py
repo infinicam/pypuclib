@@ -4,7 +4,7 @@ import numpy as np
 import pypuclib
 from pypuclib import CameraFactory, Camera, XferData, Resolution, Decoder, FramerateLimit
 from pypuclib import PUCException, WrapperException
-from pypuclib import PUC_DATA_MODE, PUC_COLOR_TYPE
+from pypuclib import PUC_COLOR_TYPE
 
 import time
 
@@ -100,14 +100,6 @@ class pypuclib_onlinetest(unittest.TestCase):
     def test_colortype(self):
         # device color mono only for now
         self.assertEqual(self.cam.colortype(), PUC_COLOR_TYPE.PUC_COLOR_MONO)
-
-    def test_datamode(self):
-        target = PUC_DATA_MODE.PUC_DATA_DECOMPRESSED_GRAY
-        self.cam.setDatamode(target)
-        self.assertEqual(self.cam.datamode(), target)
-        target = PUC_DATA_MODE.PUC_DATA_COMPRESSED
-        self.cam.setDatamode(target)
-        self.assertEqual(self.cam.datamode(), target)
 
     def test_ringubuffer_count(self):
         # set over range violation
@@ -210,8 +202,22 @@ class pypuclib_onlinetest(unittest.TestCase):
 
         self.assertTrue(seq_reset <= seq)
 
+    def test_fanState(self):
+        tmp = self.cam.fanState()
+        # turn off the fan
+        self.cam.setFanState(False)
+        state = self.cam.fanState()
+        self.assertEqual(state, False)
 
+        # turn on the fan
+        self.cam.setFanState(True)
+        state = self.cam.fanState()
+        self.assertEqual(state, True)
 
+    def test_sensorTemperature(self):
+        temperature = self.cam.sensorTemperature()
+        print("sensor temperature=%d" %(temperature))
+        self.assertTrue(0 <= temperature <= 100)
         
 
 

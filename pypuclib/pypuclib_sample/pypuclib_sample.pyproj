@@ -5,10 +5,11 @@
     <ProjectGuid>6d6d0eab-0168-4fec-8e78-dc56219f91e3</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>hello_world.py</StartupFile>
+    <StartupFile>gui_sample.py</StartupFile>
     <SearchPath>
     </SearchPath>
-    <WorkingDirectory>.</WorkingDirectory>
+    <WorkingDirectory>
+    </WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>pypuclib_sample</Name>
     <RootNamespace>pypuclib_test</RootNamespace>
@@ -34,6 +35,9 @@
   <ItemGroup>
     <Compile Include="create_movie.py" />
     <Compile Include="find1000\find1000.py" />
+    <Compile Include="GPUDecode_sample.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="gui_sample.py">
       <SubType>Code</SubType>
     </Compile>

@@ -106,3 +106,18 @@ public:
 	int min;
 	int max;
 };
+
+class GPUSetup
+{
+public:
+	PY_DOC(DOC_CLASS_GPU_SETUP,
+		"");
+
+public:
+	GPUSetup() : width(1246), height(1008) {}
+	GPUSetup(const int& w, const int& h) : width(w), height(h) {}
+	~GPUSetup() {};
+
+	int width;
+	int height;
+};

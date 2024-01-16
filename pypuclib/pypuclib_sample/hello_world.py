@@ -1,7 +1,7 @@
 import cv2 # need to import extra module "pip install opencv-python"
 import pypuclib
 from pypuclib import CameraFactory, Camera, XferData, Decoder
-from pypuclib import Resolution, PUCException, PUC_DATA_MODE
+from pypuclib import Resolution, PUCException, GPUSetup
 
 print(pypuclib.__doc__)
 
@@ -10,6 +10,18 @@ cam = CameraFactory().create()
 
 # To decode image, get decoder obj from camera
 decoder = cam.decoder()
+
+# If a GPU device is available, decoding is done on the GPU.
+# To setup GPU device
+reso = cam.resolution()
+GPUStatus = decoder.getAvailableGPUProcess()
+
+if GPUStatus == True:
+    param = GPUSetup(reso.width, reso.height)
+    decoder.setupGPUDecode(param)
+    print("Decode using a GPU device")
+elif GPUStatus == False:
+    print("Since GPU is not available, decode using CPU")
 
 # Set filepath to save image
 savePath = "hello_world.bmp"
@@ -29,7 +41,10 @@ while True:
     xferData = cam.grab()
 
     # Decode the data can be used as image
-    array = decoder.decode(xferData)
+    if GPUStatus == True:
+        array = decoder.decodeGPU(xferData, True, reso.width)
+    elif GPUStatus == False:
+        array = decoder.decode(xferData)
 
     # Show the image
     cv2.imshow("INFINICAM", array)
@@ -43,6 +58,9 @@ while True:
 
 # Close live image window
 cv2.destroyAllWindows()
+
+if GPUStatus == True:
+    decoder.teardownGPUDecode()
 
 
 

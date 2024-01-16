@@ -191,30 +191,6 @@ public:
 	"\"\"                                              \n");
 	PUC_COLOR_TYPE colortype() const;
 
-	PY_DOC(DOC_DATAMODE,
-	"\"\"Get datamode of transfer image.               \n"
-	"                                                  \n"
-	"Get datamode of transfer image in PUC_DATA_MODE.  \n"	
-	"                                                  \n"
-	"Returns                                           \n"
-	"-------                                           \n"
-	"PUC_DATA_MODE(enum)                               \n"
-	"    Transfer image data mode.                     \n"
-	"\"\"                                              \n");
-	PUC_DATA_MODE datamode() const;
-
-	PY_DOC(DOC_SET_DATAMODE,
-	"\"\"Set transfer datamode to sdk.                 \n"
-	"                                                  \n"
-	"Set transfer datamode using PUC_DATA_MODE(enum).  \n"
-	"                                                  \n"
-	"Parameters                                        \n"
-	"----------                                        \n"
-	"mode : PUC_DATA_MODE(enum)                        \n"
-	"    Transfer mode to set                          \n"
-	"\"\"                                              \n");
-	void setDatamode(const PUC_DATA_MODE& mode);
-
 	PY_DOC(DOC_RINGBUFFER_COUNT,
 	"\"\"Get ring buffer count of continuous transfer. \n"
 	"                                                  \n"
@@ -322,18 +298,14 @@ public:
 	PY_DOC(DOC_GRAB,
 	"\"\"Grab the image data from the device.          \n"
 	"                                                  \n"
-	"Grab the single image as XferData object. this    \n"
-	"Xferdata has image data based on datamode.        \n"
-	"If datamode is PUC_DATA_COMPRESSED, XferData has  \n"
-	"compressed data. To make it image, need to use    \n"
-	"decoder to decode image.                          \n"
-	"If datamode is PUC_DATA_DECOMPRESSED_GLAY,        \n"
-	"XferData has decompressed full size image data.   \n"
+	"This retrieves one image as XferData object.      \n"
+    "The data in XferData is compressed data.          \n"
+	"To treat it as an image,                          \n"
+	"it must be decoded using decoder.                 \n"
 	"                                                  \n"
 	"Returns                                           \n"
 	"-------                                           \n"
 	"data : Xferdata obj                               \n"
-	"    Image data obj based on PUC_DATA_MODE.        \n"
 	"\"\"                                              \n");
 	std::unique_ptr<XferData> grab();
 
@@ -359,6 +331,18 @@ public:
 		"    Limit info of framerate.                   \n"
 		"\"\"                                           \n");
 	FramerateLimit framerateLimit() const;
+
+	PY_DOC(DOC_FAN_STATE,
+		"");
+	bool fanState();
+
+	PY_DOC(DOC_SET_FAN_STATE,
+		"");
+	void setFanState(bool state);
+
+	PY_DOC(DOC_SENSOR_TEMPERATURE,
+		"");
+	int sensorTemperature();
 
 private:
 	int deviceNo() const { return m_deviceNo; }

@@ -27,7 +27,6 @@ Thumbs.db
 *.avi
 [Bb]in
 [Dd]ebug*/
-*.lib
 *.sbr
 obj/
 [Rr]elease*/
@@ -40,3 +39,10 @@ __pycache__/
 *egg-info/
 dist*/
 
+
+#Ignore thumbnails created by Windows
+#Ignore files built by Visual Studio
+.vs/
+#Nuget packages folder
+packages/
+.env1/

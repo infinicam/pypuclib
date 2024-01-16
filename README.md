@@ -108,6 +108,7 @@ Use beginXfer and endXfer to get callback from C++.
 * [hello_world](pypuclib/pypuclib_sample/hello_world.py)
 
   Sample of streaming a live image and saving a bitmap.
+  If a GPU device is available, decoding is done on the GPU. Otherwise, decoding is done on the CPU.
 
 * [create_movie](pypuclib/pypuclib_sample/create_movie.py)
 
@@ -135,7 +136,7 @@ This repository consists of three projects.
 
 * [pupuclib_sample](pypuclib/pypuclib_sample)
 
-  Python sample code using pypucilib
+  Python sample code using pypuclib
 
 * [pypuclib_test](pypuclib/pypuclib_test)
 

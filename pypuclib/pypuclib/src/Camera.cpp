@@ -189,31 +189,11 @@ PUC_COLOR_TYPE Camera::colortype() const
 	return type;
 }
 
-PUC_DATA_MODE Camera::datamode() const
-{
-	PUC_DATA_MODE mode;
-	auto ret = PUC_GetXferDataMode(m_handle, &mode);
-	if (PUC_CHK_FAILED(ret)) {
-		throw(PUCException("PUC_GetXferDataMode", ret));
-	}
-
-	return mode;
-}
-
-void Camera::setDatamode(const PUC_DATA_MODE& mode)
-{
-	auto ret = PUC_SetXferDataMode(m_handle, mode);
-	if (PUC_CHK_FAILED(ret)) {
-		throw(PUCException("PUC_SetXferDataMode", ret));
-	}
-}
-
 unsigned int Camera::xferDataSize() const
 {
-	auto mode = datamode();
 	unsigned int dataSize;
 
-	auto ret = PUC_GetXferDataSize(m_handle, mode, &dataSize);
+	auto ret = PUC_GetXferDataSize(m_handle, &dataSize);
 	if (PUC_CHK_FAILED(ret)) {
 		throw(PUCException("PUC_GetXferDataSize", ret));
 	}
@@ -223,10 +203,9 @@ unsigned int Camera::xferDataSize() const
 
 unsigned int Camera::maxXferDataSize() const
 {
-	auto mode = datamode();
 	unsigned int dataSize;
 
-	auto ret = PUC_GetMaxXferDataSize(m_handle, mode, &dataSize);
+	auto ret = PUC_GetMaxXferDataSize(m_handle, &dataSize);
 	if (PUC_CHK_FAILED(ret)) {
 		throw(PUCException("PUC_GetXferDataSize", ret));
 	}
@@ -326,7 +305,7 @@ std::unique_ptr<Decoder> Camera::decoder()
 std::unique_ptr<XferData> Camera::grab()
 {
 	std::unique_ptr<XferData> p =
-		std::make_unique<XferData>(xferDataSize(), resolution(), datamode());
+		std::make_unique<XferData>(xferDataSize(), resolution());
 	
 	if (!p) {
 		throw(WrapperException("bad memory allocation"));
@@ -355,7 +334,7 @@ void Camera::callbackWork(PPUC_XFER_DATA_INFO pInfo)
 	if (m_enableCallback)
 	{
 		std::unique_ptr<XferData> p =
-			std::make_unique<XferData>(pInfo, resolution(), datamode());
+			std::make_unique<XferData>(pInfo, resolution());
 
 		if (!p) {
 			throw(WrapperException("bad memory allocation"));
@@ -386,4 +365,34 @@ void Camera::resetSequenceNo()
 	if (PUC_CHK_FAILED(ret)) {
 		throw(PUCException("PUC_ResetSequenceNo", ret));
 	}
+}
+
+bool Camera::fanState()
+{
+	PUC_MODE mode;
+	auto ret = PUC_GetFanState(m_handle, &mode);
+	if (PUC_CHK_FAILED(ret)) {
+		throw(PUCException("PUC_GetFanState", ret));
+	}
+
+	return mode;
+}
+
+void Camera::setFanState(bool state)
+{
+	auto ret = PUC_SetFanState(m_handle, (PUC_MODE)state);
+	if (PUC_CHK_FAILED(ret)) {
+		throw(PUCException("PUC_SetFanState", ret));
+	}
+}
+
+int Camera::sensorTemperature()
+{
+	UINT32 temp;
+	auto ret = PUC_GetSensorTemperature(m_handle, &temp);
+	if (PUC_CHK_FAILED(ret)) {
+		throw(PUCException("PUC_GetSensorTemperature", ret));
+	}
+
+	return (int)temp;
 }

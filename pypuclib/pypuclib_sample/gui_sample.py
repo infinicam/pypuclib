@@ -9,7 +9,7 @@ import os, csv, json, threading
 from enum import IntEnum
 
 import pypuclib
-from pypuclib import CameraFactory, Camera, XferData, PUC_DATA_MODE, Resolution, Decoder
+from pypuclib import CameraFactory, Camera, XferData, Resolution, Decoder
 
 class FILE_TYPE(IntEnum):
     CSV = 0

@@ -94,10 +94,6 @@ public:
 	"\"\"                                              \n");
 	py::array_t<uint8_t> decode(XferData* data)
 	{
-		if (!data->compressed()) {
-			throw(WrapperException("the data already decoded."));
-		}
-
 		auto res = data->resolution();
 
 		py::array_t<uint8_t> buf({ res.height, res.width });
@@ -134,10 +130,6 @@ public:
 	"\"\"                                              \n");
 	py::array_t<uint8_t> decode(XferData* data, int x, int y, int w, int h)
 	{
-		if (!data->compressed()) {
-			throw(WrapperException("the data already decoded."));
-		}
-
 		py::array_t<uint8_t> buf({ h, w });
 		decode(data->dataInfo()->pData, buf.mutable_data(), x, y, w, h, w);
 		return buf;
@@ -262,12 +254,76 @@ public:
 		"\"\"                                              \n");
 	py::array_t<uint8_t> decodeDC(XferData* data, int bx, int by, int countX, int countY)
 	{
-		if (!data->compressed()) {
-			throw(WrapperException("the data already decoded."));
-		}
-
 		py::array_t<uint8_t> buf({ countY, countX });
 		decodeDC(data->dataInfo()->pData, buf.mutable_data(), bx, by, countX, countY);
+		return buf;
+	}
+
+	PY_DOC(DOC_DECODE_GPU_A,
+		"\"\"Decode compressed data from GPU.											\n"
+		"																				\n"
+		"This function use numpy array input.											\n"
+		"																				\n"
+		"Parameters																		\n"
+		"----------																		\n"
+		"array : numpy array(uint8)														\n"
+		"    Numpy array of 1d compressed data.											\n"
+		"																				\n"
+		"download : bool																\n"
+		"	If false is specified, the decoded data is stored in device (GPU) memory,	\n"
+		"	if true is specified, it is stored in host (CPU) memory.					\n"
+		"																				\n"
+		"lineBytes : int																\n"
+		"	The number of bytes of the buffer width at the unpacking destination		\n"
+		"																				\n"
+		"Returns																		\n"
+		"-------																		\n"
+		"numpy array(uint8)																\n"
+		"    Numpy array of the decompressed image.										\n"
+		"    Array size is (h, w).														\n"
+		"\"\"																			\n");
+	py::array_t<uint8_t> decodeGPU(py::array_t<uint8_t>& array, bool download, int lineBytes)
+	{
+		UINT32 width = m_param.width;
+		UINT32 height = m_param.height;
+		py::array_t<uint8_t> buf({ height, width });
+		auto dst = buf.mutable_data();
+
+		decodeGPU(download, array.mutable_data(), &dst, width);
+		return buf;
+	}
+
+	PY_DOC(DOC_DECODE_GPU_B,
+	"\"\"Decode compressed data from GPU.											\n"
+	"																				\n"
+	"This function use numpy array input.											\n"
+	"																				\n"
+	"Parameters																		\n"
+	"----------																		\n"
+	"array : XferData obj															\n"
+	"   XferData to decode.															\n"
+	"																				\n"
+	"download : bool																\n"
+	"	If false is specified, the decoded data is stored in device (GPU) memory,	\n"
+	"	if true is specified, it is stored in host (CPU) memory.					\n"
+	"																				\n"
+	"lineBytes : int																\n"
+	"	The number of bytes of the buffer width at the unpacking destination		\n"
+	"																				\n"
+	"Returns																		\n"
+	"-------																		\n"
+	"numpy array(uint8)																\n"
+	"    Numpy array of the decompressed image.										\n"
+	"    Array size is (h, w).														\n"
+	"\"\"																			\n");
+	py::array_t<uint8_t> decodeGPU(XferData* data, bool download, int lineBytes)
+	{
+		UINT32 width = m_param.width;
+		UINT32 height = m_param.height;
+		py::array_t<uint8_t> buf({ height, width });
+		auto dst = buf.mutable_data();
+
+		decodeGPU(download, data->dataInfo()->pData, &dst, width);
 		return buf;
 	}
 
@@ -327,6 +383,82 @@ public:
 	"\"\"                                              \n");
 	void setNumDecodeThread(int num) { m_numThread = num; }
 
+	PY_DOC(DOC_GET_AVAILABLE_GPU_PROCESS,
+	"\"\"This retrieves whether the PC is capable of GPU processing. \n"
+	"																 \n"
+	"Returns														 \n"
+	"-------														 \n"
+	"bool															 \n"
+	"    Returns PUC_SUCCEEDED if GPU processing is possible,		 \n" 
+	"	 otherwise returns false.									 \n"
+	"\"\"															 \n");
+	bool getAvailableGPUProcess()
+	{
+		if (PUC_CHK_FAILED(PUC_GetAvailableGPUProcess()))
+			return false;
+		
+		return true;
+	}
+
+	PY_DOC(DOC_SETUP_GPU_DECODE,
+	"\"\"Allocates memory for GPU processing.          \n"
+	"                                                  \n"
+	"Parameters                                        \n"
+	"----------                                        \n"
+	"param : GPUSetup obj							   \n"
+	"        This is a configuration parameter.        \n"
+	"                                                  \n"
+	"\"\"                                              \n");
+	void setupGPUDecode(GPUSetup param)
+	{
+		m_param.width = param.width;
+		m_param.height = param.height;
+		auto ret = PUC_SetupGPUDecode(m_param);
+		if (PUC_CHK_FAILED(ret)) {
+			throw(PUCException("PUC_SetupGPUDecode", ret));
+		}
+	}
+
+	PY_DOC(DOC_TEARDOWN_GPU_DECODE,
+	"\"\"Releases memory used by GPU processing.       \n"
+	"                                                  \n"
+	"\"\"                                              \n");
+	void teardownGPUDecode()
+	{
+		auto ret = PUC_TeardownGPUDecode();
+		if (PUC_CHK_FAILED(ret)) {
+			throw(PUCException("PUC_TeardownGPUDecode", ret));
+		}
+	}
+
+	PY_DOC(DOC_ISSETUP_GPU_DECODE,
+	"\"\"Retrieves whether GPU decode memory is allocated.  \n"
+	"														\n"
+	"Parameters												\n"
+	"----------											    \n"
+	"status : bool							                \n"
+	"        true : allocated, false : not allocated.       \n"
+	"                                                       \n"
+	"\"\"                                                   \n");
+	void isSetupGPUDecode(bool& status)
+	{
+		PUC_IsSetupGPUDecode(status);
+	}
+
+	PY_DOC(DOC_GET_GPU_LAST_ERROR,
+	"\"\"Retrieves the error code from the last GPU processing. \n"
+	"															\n"
+	"Parameters													\n"
+	"----------													\n"
+	"errorCode : int							                \n"
+	"        The error code from GPU.							\n"
+	"															\n"
+	"\"\"														\n");
+	void getGPULastError(int& errorCode)
+	{
+		PUC_GetGPULastError(errorCode);
+	}
+
 private:
 	void decode(uint8_t* src, uint8_t* dst, int x, int y, int w, int h, int lb)
 	{
@@ -344,6 +476,20 @@ private:
 		}
 	}
 
+	void decodeGPU(bool download, uint8_t* src, uint8_t** dst, int lineBytes)
+	{
+		auto ret = PUC_DecodeGPU(download, src, dst, lineBytes);
+		if (PUC_CHK_FAILED(ret))
+		{
+			// GPUÉGÉâÅ[ÇéÊìæÇ∑ÇÈ
+			int err;
+			PUC_GetGPULastError(err);
+			printf("GPU Error=%d", err);
+			throw(PUCException("PUC_DecodeGPU", ret));
+		}
+	}
+
 	unsigned short m_quantize[PUC_Q_COUNT];
 	int m_numThread;
+	PUC_GPU_SETUP_PARAM m_param;
 };
