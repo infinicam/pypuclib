@@ -21,7 +21,7 @@ PYBIND11_MODULE(pypuclib, m) {
     m.doc() = "This module is a Python Wrapper for SDK(PUCLIB) of PHOTRON high-speed camera INFINICAM \n"
         	  "See README to more instruction to control package \n"
               ""
-              "Copyright (C) 2021 PHOTRON LIMITED";
+              "Copyright (C) 2021-2025 PHOTRON LIMITED";
 
     py::class_<CameraFactory, unique_ptr<CameraFactory, py::nodelete>>(m, "CameraFactory")
         .def(py::init([]() {

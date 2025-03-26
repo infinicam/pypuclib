@@ -6,7 +6,7 @@ from pybind11 import get_cmake_dir
 
 import os, sys
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 ext_modules = [
     Pybind11Extension(
